@@ -32,7 +32,7 @@ function App() {
           <span> Place Player Two's sphere.</span>
         )}
         {inProgressWithSpheresPlaced && (
-          <span>{turn}'s turn.</span>
+          <span>{turn === Players.PLAYER_ONE ? "White" : "Black"}'s turn.</span>
         )}
       </div>
     </div>
