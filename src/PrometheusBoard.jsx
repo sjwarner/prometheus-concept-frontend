@@ -30,17 +30,25 @@ const PrometheusBoard = (
   }
 
   const addPlayerOneSphere = (rank, file) => {
-    let tmp = gameState;
-    tmp[rank][file] = Pieces.WHITE_SPHERE;
-    setGameState(tmp);
-    setPlayerOneSpherePlaced(true);
+    // Sphere has to replace one of Player One's pieces.
+    let selectedSquare = gameState[rank][file];
+    if (selectedSquare && selectedSquare === selectedSquare.toUpperCase()) {
+      let tmp = gameState;
+      tmp[rank][file] = Pieces.WHITE_SPHERE;
+      setGameState(tmp);
+      setPlayerOneSpherePlaced(true);
+    }
   }
 
   const addPlayerTwoSphere = (rank, file) => {
-    let tmp = gameState;
-    tmp[rank][file] = Pieces.BLACK_SPHERE;
-    setGameState(tmp);
-    setPlayerTwoSpherePlaced(true);
+    // Sphere has to replace one of Player Two's pieces.
+    let selectedSquare = gameState[rank][file];
+    if (selectedSquare && selectedSquare === selectedSquare.toLowerCase()) {
+      let tmp = gameState;
+      tmp[rank][file] = Pieces.BLACK_SPHERE;
+      setGameState(tmp);
+      setPlayerTwoSpherePlaced(true);
+    }
   }
 
   const selectCandidatePiece = (rank, file) => {
