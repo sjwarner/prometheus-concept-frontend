@@ -50,10 +50,28 @@
 
 .sphere-white {
   background-color: whitesmoke;
-  border: 3px solid black;
+  border: 2px solid black;
 }
 
 .sphere-black {
   background-color: black;
-  border: 3px solid whitesmoke;
+  border: 2px solid whitesmoke;
+}
+
+.tetrahedron {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
+}
+
+.pyramid {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
+}
+
+.cube {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
 }
