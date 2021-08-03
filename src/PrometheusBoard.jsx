@@ -26,7 +26,9 @@ const PrometheusBoard = (
         ? addPlayerTwoSphere(rank, file)
         : !originRank && !originFile
           ? selectCandidatePiece(rank, file)
-          : movePiece(rank, file)
+          : (originRank === rank && originFile === file)
+            ? clearCandidatePiece()
+            : movePiece(rank, file)
   }
 
   const addPlayerOneSphere = (rank, file) => {
@@ -59,6 +61,11 @@ const PrometheusBoard = (
       setOriginFile(file);
     }
   };
+
+  const clearCandidatePiece = () => {
+    setOriginRank(null);
+    setOriginFile(null);
+  }
 
   const movePiece = (destinationRank, destinationFile) => {
     let tmp = gameState;
