@@ -44,9 +44,9 @@ const renderPiece = (piece) => {
   }
 }
 
-const PrometheusSquare = ({colour, piece, onClick}) => {
+const PrometheusSquare = ({colour, piece, selected, onClick}) => {
   return (
-    <div className={`square square-${colour} text-red-500`} onClick={onClick}>
+    <div className={`square square-${colour} ${selected ? "square-selected" : ""}`} onClick={onClick}>
       {renderPiece(piece, colour)}
     </div>
   )

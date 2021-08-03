@@ -79,6 +79,7 @@ const PrometheusBoard = (
               {Array(8).fill(1).map((el, y) => {
                 return (
                   <PrometheusSquare colour={(x + y) % 2 === 0 ? "black" : "white"} piece={gameState[x][y]}
+                                    selected={x === originRank && y === originFile}
                                     onClick={() => {if(inProgress) makeMove(x, y)}} key={y} />
                 )
               })}
