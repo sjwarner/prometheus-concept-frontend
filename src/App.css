@@ -50,12 +50,12 @@
 
 .sphere-white {
   background-color: whitesmoke;
-  border: 2px solid black;
+  border: 2px solid #d4af37;
 }
 
 .sphere-black {
   background-color: black;
-  border: 2px solid whitesmoke;
+  border: 2px solid #d4af37;
 }
 
 .tetrahedron {

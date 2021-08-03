@@ -2,7 +2,7 @@ import React from 'react';
 
 const Pyramid = ({colour}) => {
   const fillColour = colour === "black" ? "black" : "whitesmoke";
-  const strokeColour = colour === "black" ? "whitesmoke" : "black";
+  const strokeColour = "#d4af37";
 
   return (
     <div className="pyramid">
