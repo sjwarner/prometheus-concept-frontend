@@ -52,8 +52,12 @@ const PrometheusBoard = (
   }
 
   const selectCandidatePiece = (rank, file) => {
-    setOriginRank(rank);
-    setOriginFile(file);
+    let candidateSquare = gameState[rank][file];
+    if ((turn === Players.PLAYER_ONE && candidateSquare && candidateSquare === candidateSquare.toUpperCase())
+      || (turn === Players.PLAYER_TWO && candidateSquare && candidateSquare === candidateSquare.toLowerCase())) {
+      setOriginRank(rank);
+      setOriginFile(file);
+    }
   };
 
   const movePiece = (destinationRank, destinationFile) => {
