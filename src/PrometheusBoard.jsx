@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PrometheusSquare from "./PrometheusSquare";
 import InitialGameState from "./InitialGameState";
 import Pieces from "./Pieces";
+import Players from "./Players";
 
 const PrometheusBoard = (
     {
@@ -9,7 +10,9 @@ const PrometheusBoard = (
       playerOneSpherePlaced,
       playerTwoSpherePlaced,
       setPlayerOneSpherePlaced,
-      setPlayerTwoSpherePlaced
+      setPlayerTwoSpherePlaced,
+      turn,
+      setTurn
     }
   ) => {
   const [gameState, setGameState] = useState(InitialGameState);
@@ -52,6 +55,7 @@ const PrometheusBoard = (
     setGameState(tmp);
     setOriginRank(null);
     setOriginFile(null);
+    setTurn(turn === Players.PLAYER_ONE ? Players.PLAYER_TWO : Players.PLAYER_ONE)
   };
 
   return (

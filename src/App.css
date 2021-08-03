@@ -38,3 +38,22 @@
 .square-white {
   background-color: whitesmoke;
 }
+
+.sphere {
+  height:80%;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  width:80%;
+  margin: 10%;
+}
+
+.sphere-white {
+  background-color: whitesmoke;
+  border: 3px solid black;
+}
+
+.sphere-black {
+  background-color: black;
+  border: 3px solid whitesmoke;
+}

@@ -17,7 +17,7 @@ function App() {
       <h1 className="mb-4">Prometheus Concept</h1>
       <PrometheusBoard inProgress={inProgress} playerOneSpherePlaced={playerOneSpherePlaced} playerTwoSpherePlaced={playerTwoSpherePlaced}
                        setPlayerOneSpherePlaced={setPlayerOneSpherePlaced} setPlayerTwoSpherePlaced={setPlayerTwoSpherePlaced}
-      />
+                       turn={turn} setTurn={setTurn} />
       <div className="below-board-container mt-4" >
         {!inProgress && (
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
