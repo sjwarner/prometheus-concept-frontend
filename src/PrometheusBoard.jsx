@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PrometheusSquare from "./PrometheusSquare";
 import InitialGameState from "./InitialGameState";
+import Pieces from "./Pieces";
 
 const PrometheusBoard = (
     {
@@ -27,14 +28,14 @@ const PrometheusBoard = (
 
   const addPlayerOneSphere = (rank, file) => {
     let tmp = gameState;
-    tmp[rank][file] = "S"
+    tmp[rank][file] = Pieces.WHITE_SPHERE;
     setGameState(tmp);
     setPlayerOneSpherePlaced(true);
   }
 
   const addPlayerTwoSphere = (rank, file) => {
     let tmp = gameState;
-    tmp[rank][file] = "s"
+    tmp[rank][file] = Pieces.BLACK_SPHERE;
     setGameState(tmp);
     setPlayerTwoSpherePlaced(true);
   }
@@ -58,11 +59,11 @@ const PrometheusBoard = (
       <div className="content">
         {Array(8).fill(1).map((el, x) => {
           return (
-            <div id={`rank-${x}`} className="board-row flex flex-row">
+            <div id={`rank-${x}`} className="board-row flex flex-row" key={x}>
               {Array(8).fill(1).map((el, y) => {
                 return (
                   <PrometheusSquare colour={(x + y) % 2 === 0 ? "black" : "white"} piece={gameState[x][y]}
-                                    onClick={() => {if(inProgress) makeMove(x, y)}}/>
+                                    onClick={() => {if(inProgress) makeMove(x, y)}} key={y} />
                 )
               })}
             </div>
