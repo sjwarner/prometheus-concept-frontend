@@ -72,14 +72,16 @@ const PrometheusBoard = (
   }
 
   const movePiece = (destinationRank, destinationFile) => {
-    let tmp = gameState;
-    tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
-    tmp[originRank][originFile] = ""
-    setGameState(tmp);
-    setOriginRank(null);
-    setOriginFile(null);
-    setValidMoves([]);
-    setTurn(turn === Players.PLAYER_ONE ? Players.PLAYER_TWO : Players.PLAYER_ONE)
+    if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
+      let tmp = gameState;
+      tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
+      tmp[originRank][originFile] = ""
+      setGameState(tmp);
+      setOriginRank(null);
+      setOriginFile(null);
+      setValidMoves([]);
+      setTurn(turn === Players.PLAYER_ONE ? Players.PLAYER_TWO : Players.PLAYER_ONE)
+    }
   };
 
   return (
