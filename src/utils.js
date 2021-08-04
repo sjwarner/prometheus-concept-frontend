@@ -10,8 +10,8 @@ export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
     for (let x = 0; x < 8; x++) {
       // Skip your own square and own pieces
       if ((x === rank && y === file)
-       || (isUpper(piece) && isUpper(gameState[x][y]))
-       || (isLower(piece) && isLower(gameState[x][y]))) {
+       || (isUpper(piece) && isUpper(gameState[x][y]) && gameState[x][y])
+       || (isLower(piece) && isLower(gameState[x][y]) && gameState[x][y])) {
         continue;
       }
 
@@ -21,7 +21,6 @@ export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
       }
     }
   }
-
   setValidMoves(validMoves);
 }
 
@@ -35,13 +34,17 @@ export const isArrayInArray = (arr, item) => {
 
 const movementSpeed = (piece) => {
   switch(piece) {
-    case Pieces.WHITE_SPHERE || Pieces.BLACK_SPHERE:
+    case Pieces.WHITE_SPHERE:
+    case Pieces.BLACK_SPHERE:
       return 0;
-    case Pieces.WHITE_TETRAHEDRON || Pieces.BLACK_TETRAHEDRON:
+    case Pieces.WHITE_TETRAHEDRON:
+    case Pieces.BLACK_TETRAHEDRON:
       return 4;
-    case Pieces.WHITE_PYRAMID || Pieces.BLACK_PYRAMID:
+    case Pieces.WHITE_PYRAMID:
+    case Pieces.BLACK_PYRAMID:
       return 5;
-    case Pieces.WHITE_CUBE || Pieces.BLACK_CUBE:
+    case Pieces.WHITE_CUBE:
+    case Pieces.BLACK_CUBE:
       return 8;
     default:
       return 0;
