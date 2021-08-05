@@ -22,7 +22,14 @@ const PrometheusBoard = (
 
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
+  const [playerOneFirstTurn, setPlayerOneFirstTurn] = useState(true);
+  const [playerTwoFirstTurn, setPlayerTwoFirstTurn] = useState(true);
   const [validMoves, setValidMoves] = useState([]);
+
+  useEffect(() => {
+    setPlayerOneFirstTurn(true);
+    setPlayerTwoFirstTurn(true);
+  }, [inProgress])
 
   const makeMove = (rank, file) => {
     !playerOneSpherePlaced
@@ -64,7 +71,7 @@ const PrometheusBoard = (
       || (turn === Players.PLAYER_TWO && candidatePiece && candidatePiece === candidatePiece.toLowerCase())) {
       setOriginRank(rank);
       setOriginFile(file);
-      calculateValidMoves(rank, file, gameState, setValidMoves);
+      calculateValidMoves(rank, file, gameState, setValidMoves, playerOneFirstTurn, playerTwoFirstTurn);
     }
   };
 
@@ -80,6 +87,12 @@ const PrometheusBoard = (
       if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
         setWinner(turn);
         setInProgress(false);
+      }
+      if (playerOneFirstTurn && turn === Players.PLAYER_ONE) {
+        setPlayerOneFirstTurn(false)
+      }
+      if (playerTwoFirstTurn && turn === Players.PLAYER_TWO) {
+        setPlayerTwoFirstTurn(false)
       }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
       tmp[originRank][originFile] = ""
