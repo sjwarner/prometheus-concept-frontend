@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PrometheusSquare from "./PrometheusSquare";
-import InitialGameState from "./InitialGameState";
 import Pieces from "./Pieces";
 import Players from "./Players";
 import {calculateValidMoves, isArrayInArray} from "./utils";
@@ -8,15 +7,19 @@ import {calculateValidMoves, isArrayInArray} from "./utils";
 const PrometheusBoard = (
     {
       inProgress,
+      setInProgress,
       playerOneSpherePlaced,
       playerTwoSpherePlaced,
       setPlayerOneSpherePlaced,
       setPlayerTwoSpherePlaced,
+      gameState,
+      setGameState,
       turn,
-      setTurn
+      setTurn,
+      setWinner
     }
   ) => {
-  const [gameState, setGameState] = useState(InitialGameState);
+
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
   const [validMoves, setValidMoves] = useState([]);
@@ -74,6 +77,10 @@ const PrometheusBoard = (
   const movePiece = (destinationRank, destinationFile) => {
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
       let tmp = gameState;
+      if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
+        setWinner(turn);
+        setInProgress(false);
+      }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
       tmp[originRank][originFile] = ""
       setGameState(tmp);
