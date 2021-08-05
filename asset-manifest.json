@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/prometheus-concept/static/css/main.49bd16ea.chunk.css",
+    "main.js": "/prometheus-concept/static/js/main.8d6a96eb.chunk.js",
+    "main.js.map": "/prometheus-concept/static/js/main.8d6a96eb.chunk.js.map",
+    "runtime-main.js": "/prometheus-concept/static/js/runtime-main.4f6a5b2f.js",
+    "runtime-main.js.map": "/prometheus-concept/static/js/runtime-main.4f6a5b2f.js.map",
+    "static/js/2.e2179223.chunk.js": "/prometheus-concept/static/js/2.e2179223.chunk.js",
+    "static/js/2.e2179223.chunk.js.map": "/prometheus-concept/static/js/2.e2179223.chunk.js.map",
+    "static/js/3.3adf82c2.chunk.js": "/prometheus-concept/static/js/3.3adf82c2.chunk.js",
+    "static/js/3.3adf82c2.chunk.js.map": "/prometheus-concept/static/js/3.3adf82c2.chunk.js.map",
+    "index.html": "/prometheus-concept/index.html",
+    "static/css/main.49bd16ea.chunk.css.map": "/prometheus-concept/static/css/main.49bd16ea.chunk.css.map",
+    "static/js/2.e2179223.chunk.js.LICENSE.txt": "/prometheus-concept/static/js/2.e2179223.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4f6a5b2f.js",
+    "static/js/2.e2179223.chunk.js",
+    "static/css/main.49bd16ea.chunk.css",
+    "static/js/main.8d6a96eb.chunk.js"
+  ]
+}
