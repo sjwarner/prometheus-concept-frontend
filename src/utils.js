@@ -3,26 +3,30 @@ import Pieces from "./Pieces";
 export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
   const piece = gameState[rank][file];
   const movement = movementSpeed(piece);
-  let validMoves = []
+  let validMoves = [];
 
-  // Do some smarts here with movement and gameState
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
-      // Skip your own square and own pieces
-      if ((x === rank && y === file)
-       || (isUpper(piece) && isUpper(gameState[x][y]) && gameState[x][y])
-       || (isLower(piece) && isLower(gameState[x][y]) && gameState[x][y])) {
-        continue;
-      }
+  addValidMoves(rank, file - 1, movement - 1, validMoves, piece, gameState) // up
+  addValidMoves(rank + 1, file, movement - 1, validMoves, piece, gameState) // right
+  addValidMoves(rank, file + 1, movement - 1, validMoves, piece, gameState) // down
+  addValidMoves(rank - 1, file, movement - 1, validMoves, piece, gameState) // left
 
-      // TODO: Work out valid squares to land on
-      if (Math.abs(x - rank) + Math.abs(y - file) <= movement) {
-        validMoves.push([x,y])
-      }
-    }
-  }
   setValidMoves(validMoves);
 }
+
+const addValidMoves = (x, y, movement, validMoves, piece, gameState) => {
+  if (7 < x || x < 0 || 7 < y || y < 0) return;
+
+  if (gameState[x][y] && isPlayerPiece(gameState[x][y], piece)) return; // Abort if hits own piece
+  if (gameState[x][y]) {validMoves.push([x,y]); return;} // Mark valid and abort if hit opponent piece
+  if (movement === 0) {validMoves.push([x,y]); return;} // Final move terminates
+
+  validMoves.push([x,y]);
+
+  addValidMoves(x, y - 1, movement - 1, validMoves, piece, gameState) // up
+  addValidMoves(x + 1, y, movement - 1, validMoves, piece, gameState) // right
+  addValidMoves(x, y + 1, movement - 1, validMoves, piece, gameState) // down
+  addValidMoves(x - 1, y, movement - 1, validMoves, piece, gameState) // left
+};
 
 export const isArrayInArray = (arr, item) => {
   const item_as_string = JSON.stringify(item);
@@ -55,6 +59,6 @@ const isUpper = (str) => {
   return !/[a-z]/.test(str) && /[A-Z]/.test(str);
 }
 
-const isLower = (str) => {
-  return !isUpper(str)
+const isPlayerPiece = (str1, str2) => {
+  return isUpper(str1) === isUpper(str2);
 }
