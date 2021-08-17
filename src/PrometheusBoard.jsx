@@ -36,7 +36,7 @@ const PrometheusBoard = (
       ? addPlayerOneSphere(rank, file)
       : !playerTwoSpherePlaced
         ? addPlayerTwoSphere(rank, file)
-        : !originRank && !originFile
+        : originRank === null && originFile === null
           ? selectCandidatePiece(rank, file)
           : (originRank === rank && originFile === file)
             ? clearCandidatePiece()
