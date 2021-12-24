@@ -1,6 +1,6 @@
 {
   "name": "prometheus-concept",
-  "homepage": "https://sjwarner.github.io/prometheus-concept",
+  "homepage": "https://prometheus-concept.sjwarner.me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
