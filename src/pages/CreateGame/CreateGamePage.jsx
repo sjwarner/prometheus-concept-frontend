@@ -54,17 +54,17 @@ const CreateGamePage = () => {
                     </button>
                 )}
 
-                {/*{roomCode && (*/}
-                {/*    <div>*/}
-                {/*        <p>*/}
-                {/*            ROOM CODE: <br></br> <br></br>*/}
-                {/*            <b className="" onClick={() => {}}>*/}
-                {/*                {roomCode}*/}
-                {/*            </b>*/}
-                {/*        </p>*/}
-                {/*        /!*{this.state.copied ? <p>Copied to clipboard</p> : null}*!/*/}
-                {/*    </div>*/}
-                {/*)}*/}
+                {roomCode && (
+                    <div>
+                        <p>
+                            ROOM CODE: <br></br> <br></br>
+                            <b className="" onClick={() => {}}>
+                                {roomCode}
+                            </b>
+                        </p>
+                        {/*{this.state.copied ? <p>Copied to clipboard</p> : null}*/}
+                    </div>
+                )}
             </div>
         </div>
     );
