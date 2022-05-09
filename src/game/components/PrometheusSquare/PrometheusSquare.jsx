@@ -1,9 +1,9 @@
 import React from 'react';
-import Sphere from "./Pieces/Sphere";
-import Pieces from "./game/logic/Pieces";
-import Tetrahedron from "./Pieces/Tetrahedron";
-import Pyramid from "./Pieces/Pyramid";
-import Cube from "./Pieces/Cube";
+import Sphere from "../Pieces/Sphere";
+import Pieces from "../../logic/Pieces";
+import Tetrahedron from "../Pieces/Tetrahedron";
+import Pyramid from "../Pieces/Pyramid";
+import Cube from "../Pieces/Cube";
 
 const renderPiece = (piece) => {
   switch(piece) {

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "../../App.css";
 
-import PrometheusBoard from "../../PrometheusBoard";
+import PrometheusBoard from "../../game/components/PrometheusBoard/PrometheusBoard";
 import Players from "../../game/logic/Players";
 import InitialGameState from "../../game/logic/InitialGameState";
 

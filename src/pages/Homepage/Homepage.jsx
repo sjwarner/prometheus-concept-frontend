@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import Tetrahedron from "../../Pieces/Tetrahedron";
+import Tetrahedron from "../../game/components/Pieces/Tetrahedron";
 
 const Homepage = () => {
     return (
