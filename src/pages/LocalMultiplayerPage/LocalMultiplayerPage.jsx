@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import "../../App.css";
 
 import PrometheusBoard from "../../PrometheusBoard";
-import Players from "../../Game/logic/Players";
-import InitialGameState from "../../Game/logic/InitialGameState";
+import Players from "../../game/logic/Players";
+import InitialGameState from "../../game/logic/InitialGameState";
 
 const LocalMultiplayerPage = () => {
     const [inProgress, setInProgress] = useState(false);

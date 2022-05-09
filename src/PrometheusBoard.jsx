@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import PrometheusSquare from "./PrometheusSquare";
-import Pieces from "./Game/logic/Pieces";
-import Players from "./Game/logic/Players";
-import {calculateValidMoves, isArrayInArray} from "./Game/logic/utils";
+import Pieces from "./game/logic/Pieces";
+import Players from "./game/logic/Players";
+import {calculateValidMoves, isArrayInArray} from "./game/logic/utils";
 
 const PrometheusBoard = (
     {

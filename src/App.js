@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import LocalMultiplayerPage from "./Pages/LocalMultiplayerPage/LocalMultiplayerPage";
-import Homepage from "./Pages/Homepage/Homepage";
+import LocalMultiplayerPage from "./pages/LocalMultiplayerPage/LocalMultiplayerPage";
+import Homepage from "./pages/Homepage/Homepage";
 
 function App() {
   return (
