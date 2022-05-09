@@ -24,3 +24,6 @@ yarn-error.log*
 
 # IDEA files
 .idea/**
+
+# env
+.env
