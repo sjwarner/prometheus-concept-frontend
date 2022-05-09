@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import LocalMultiplayerPage from "./pages/LocalMultiplayerPage/LocalMultiplayerPage";
 import Homepage from "./pages/Homepage/Homepage";
+import LocalMultiplayerPage from "./pages/LocalMultiplayerPage/LocalMultiplayerPage";
+import CreateGamePage from "./pages/CreateGame/CreateGamePage";
 
 function App() {
   return (
@@ -11,9 +12,7 @@ function App() {
         <Router>
           <div>
             <Routes>
-              <Route path="/create">
-                {/*<React.Fragment><div>Create game</div></React.Fragment>*/}
-              </Route>
+              <Route path="/create" element={<CreateGamePage />} />
               <Route path="/join">
                 {/*<React.Fragment><div>Join game</div></React.Fragment>*/}
               </Route>
