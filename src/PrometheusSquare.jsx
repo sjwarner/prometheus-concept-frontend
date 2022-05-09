@@ -1,6 +1,6 @@
 import React from 'react';
 import Sphere from "./Pieces/Sphere";
-import Pieces from "./Pieces";
+import Pieces from "./Game/logic/Pieces";
 import Tetrahedron from "./Pieces/Tetrahedron";
 import Pyramid from "./Pieces/Pyramid";
 import Cube from "./Pieces/Cube";
