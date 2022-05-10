@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const CreateGamePage = () => {
-    const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+    // const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+    const baseUrl = "http://localhost:8000";
     const [username, setUsername] = useState("");
     const [roomCode, setRoomCode] = useState(undefined);
 

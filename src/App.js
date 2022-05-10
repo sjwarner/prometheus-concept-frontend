@@ -5,6 +5,7 @@ import "./App.css";
 import Homepage from "./pages/Homepage/Homepage";
 import LocalMultiplayerPage from "./pages/LocalMultiplayer/LocalMultiplayerPage";
 import CreateGamePage from "./pages/CreateGame/CreateGamePage";
+import JoinGamePage from "./pages/JoinGame/JoinGamePage";
 
 function App() {
   return (
@@ -13,9 +14,7 @@ function App() {
           <div>
             <Routes>
               <Route path="/create" element={<CreateGamePage />} />
-              <Route path="/join">
-                {/*<React.Fragment><div>Join game</div></React.Fragment>*/}
-              </Route>
+              <Route path="/join" element={<JoinGamePage />} />
               <Route path="/local-multiplayer" element={<LocalMultiplayerPage />} />
               <Route path="/" element={<Homepage />} />
             </Routes>
