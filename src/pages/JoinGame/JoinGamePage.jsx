@@ -152,21 +152,24 @@ const JoinGamePage = () => {
                     <div className="mt-4">{errorMessage}</div>
                 )}
                 {!isLoading && (
-                    <button className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                            onClick={() => joinParty(username, roomCode)}>
-                        >
+                    <button
+                        className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                        onClick={() => attemptJoinParty()}
+                        disabled={isLoading}
+                    >
                         Join game
                     </button>
                 )}
-                {!isInRoom && (
+
+                {/*{!isInRoom && (*/}
                     <button
                         className="joinButton"
                         onClick={() => reportReady()}
                         disabled={isReady}
                     >
-                        Ready
+                        Ready up!
                     </button>
-                )}
+                {/*)}*/}
             </div>
         </div>
     );
