@@ -67,7 +67,6 @@ const CreateGamePage = () => {
             const readyPlayers = players?.map(player => player.isReady).filter((isReady) => isReady === true).length;
 
             if (players.length === 2 && readyPlayers === players.length) {
-                this.setState({ canStart: true });
                 setCanStart(true);
             } else {
                 setCanStart(false);
