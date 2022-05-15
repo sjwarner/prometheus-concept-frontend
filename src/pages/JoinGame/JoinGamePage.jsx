@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
-// import * as socketIo from 'socket.io-client';
 
 const JoinGamePage = () => {
     const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -41,7 +40,7 @@ const JoinGamePage = () => {
             console.log("join successful");
 
             setIsLoading(false);
-            setIsInRoom(false);
+            setIsInRoom(true);
         });
 
         socket.on("joinFailed", function (err) {
@@ -151,7 +150,7 @@ const JoinGamePage = () => {
                 {hasError && (
                     <div className="mt-4">{errorMessage}</div>
                 )}
-                {!isLoading && (
+                {!isLoading && !isInRoom && (
                     <button
                         className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                         onClick={() => attemptJoinParty()}
@@ -161,15 +160,15 @@ const JoinGamePage = () => {
                     </button>
                 )}
 
-                {/*{!isInRoom && (*/}
+                {isInRoom && (
                     <button
-                        className="joinButton"
+                        className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                         onClick={() => reportReady()}
                         disabled={isReady}
                     >
                         Ready up!
                     </button>
-                {/*)}*/}
+                )}
             </div>
         </div>
     );
