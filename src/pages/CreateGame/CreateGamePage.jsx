@@ -125,6 +125,41 @@ const CreateGamePage = () => {
                         {/*{this.state.copied ? <p>Copied to clipboard</p> : null}*/}
                     </div>
                 )}
+
+                {isInRoom && (
+                    <div>
+                        {players.map((player, index) => <div key={index}>{player.name}</div>)}
+                    </div>
+
+                    // <div className="readyUnitContainer">
+                    //     <ReactSortable
+                    //         list={this.state.players}
+                    //         setList={(newState) => this.setState({ players: newState })}
+                    //     >
+                    //         {this.state.players.map((item, index) => {
+                    //             let ready;
+                    //             let readyUnitColor = "#E46258";
+                    //             if (item.isReady) {
+                    //                 ready = <b>Ready!</b>;
+                    //                 readyUnitColor = "#73C373";
+                    //             } else {
+                    //                 ready = <b>Not Ready</b>;
+                    //             }
+                    //             return (
+                    //                 <div
+                    //                     className="readyUnit"
+                    //                     style={{ backgroundColor: readyUnitColor }}
+                    //                     key={index}
+                    //                 >
+                    //                     <p>
+                    //                         {index + 1}. {item.name} {ready}
+                    //                     </p>
+                    //                 </div>
+                    //             );
+                    //         })}
+                    //     </ReactSortable>
+                    // </div>
+                )}
             </div>
         </div>
     );
