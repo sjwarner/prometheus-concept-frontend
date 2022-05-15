@@ -27,6 +27,12 @@ const CreateGamePage = () => {
         }
     }, [baseUrl, roomCode])
 
+    useEffect(() => {
+        if (socket) {
+            joinParty();
+        }
+    }, [socket])
+
     const createParty = (username) => {
         if (!username) {
             setErrorMessage("Username must be set");
