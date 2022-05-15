@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { ReactSortable } from "react-sortablejs";
 
 const CreateGamePage = () => {
     // const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -127,38 +128,36 @@ const CreateGamePage = () => {
                 )}
 
                 {isInRoom && (
-                    <div>
-                        {players.map((player, index) => <div key={index}>{player.name}</div>)}
+                    <div className="readyUnitContainer">
+                        <ReactSortable
+                            list={players}
+                            setList={(newPlayerOrder) => setPlayers(newPlayerOrder)}
+                        >
+                            {players.map((player, index) => {
+                                let ready;
+                                let readyUnitColor = "#E46258";
+                                if (player.isReady) {
+                                    ready = <b>Ready!</b>;
+                                    readyUnitColor = "#73C373";
+                                } else {
+                                    ready = <b>Not Ready</b>;
+                                }
+                                return (
+                                    <>
+                                        <div
+                                            className="readyUnit"
+                                            style={{ backgroundColor: readyUnitColor }}
+                                            key={index}
+                                        >
+                                            <p>
+                                                {index === 0 ? 'White' : 'Black'}: {player.name} {ready}
+                                            </p>
+                                        </div>
+                                    </>
+                                );
+                            })}
+                        </ReactSortable>
                     </div>
-
-                    // <div className="readyUnitContainer">
-                    //     <ReactSortable
-                    //         list={this.state.players}
-                    //         setList={(newState) => this.setState({ players: newState })}
-                    //     >
-                    //         {this.state.players.map((item, index) => {
-                    //             let ready;
-                    //             let readyUnitColor = "#E46258";
-                    //             if (item.isReady) {
-                    //                 ready = <b>Ready!</b>;
-                    //                 readyUnitColor = "#73C373";
-                    //             } else {
-                    //                 ready = <b>Not Ready</b>;
-                    //             }
-                    //             return (
-                    //                 <div
-                    //                     className="readyUnit"
-                    //                     style={{ backgroundColor: readyUnitColor }}
-                    //                     key={index}
-                    //                 >
-                    //                     <p>
-                    //                         {index + 1}. {item.name} {ready}
-                    //                     </p>
-                    //                 </div>
-                    //             );
-                    //         })}
-                    //     </ReactSortable>
-                    // </div>
                 )}
             </div>
         </div>
