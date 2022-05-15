@@ -48,7 +48,6 @@ const CreateGamePage = () => {
             .then((res) => {
                 setIsLoading(false);
                 setRoomCode(res.data.namespace);
-                joinParty();
             })
             .catch(err => {
                 console.log(err)
