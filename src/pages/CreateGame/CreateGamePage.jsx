@@ -11,6 +11,7 @@ const CreateGamePage = () => {
     const [roomCode, setRoomCode] = useState(null);
     const [isInRoom, setIsInRoom] = useState(false);
     const [canStart, setCanStart] = useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false);
     const [players, setPlayers] = useState(null);
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -77,6 +78,13 @@ const CreateGamePage = () => {
             console.log("You've lost connection with the server");
         });
     }, [socket, username]);
+
+    const startGame = () => {
+        socket.emit("startGameSignal", players);
+
+        socket.on("startGame", () => {
+            setIsGameStarted(true)
+        });
     };
 
     useEffect(() => {
@@ -129,6 +137,13 @@ const CreateGamePage = () => {
 
                 {isInRoom && (
                     <PlayerList players={players} setPlayers={setPlayers} />
+                )}
+
+                {canStart && (
+                    <button className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                            onClick={() => startGame()}>
+                        Start Game
+                    </button>
                 )}
             </div>
         </div>
