@@ -58,7 +58,7 @@ const CreateGamePage = () => {
     }
 
     const joinParty = () => {
-        console.log("socket created");
+        console.log('Joining party')
         socket.emit("setName", username);
 
         socket.on("joinSuccess", () => {
