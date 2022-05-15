@@ -142,17 +142,15 @@ const CreateGamePage = () => {
                                     ready = <b>Not Ready</b>;
                                 }
                                 return (
-                                    <>
-                                        <div
-                                            className="readyUnit"
-                                            style={{ backgroundColor: readyUnitColor }}
-                                            key={index}
-                                        >
-                                            <p>
-                                                {index === 0 ? 'White' : 'Black'}: {player.name} {ready}
-                                            </p>
-                                        </div>
-                                    </>
+                                    <div
+                                        className="readyUnit"
+                                        style={{ backgroundColor: readyUnitColor }}
+                                        key={index}
+                                    >
+                                        <p>
+                                            {index === 0 ? 'White' : 'Black'}: {player.name} {ready}
+                                        </p>
+                                    </div>
                                 );
                             })}
                         </ReactSortable>
