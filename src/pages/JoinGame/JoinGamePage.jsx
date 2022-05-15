@@ -27,13 +27,6 @@ const JoinGamePage = () => {
     }, [baseUrl, roomCode])
 
     const joinParty = () => {
-        // const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
-        //     transports: ["websocket"]
-        // });
-        //
-        // console.log(newSocket);
-        // setSocket(newSocket);
-
         socket.emit("setName", username);
 
         socket.on("joinSuccess", function () {
