@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { ReactSortable } from "react-sortablejs";
+
+import PlayerList from "../../general/components/PlayerList/PlayerList";
 
 const CreateGamePage = () => {
     const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -126,34 +127,7 @@ const CreateGamePage = () => {
                 )}
 
                 {isInRoom && (
-                    <div className="readyUnitContainer">
-                        <ReactSortable
-                            list={players}
-                            setList={(newPlayerOrder) => setPlayers(newPlayerOrder)}
-                        >
-                            {players.map((player, index) => {
-                                let ready;
-                                let readyUnitColor = "#E46258";
-                                if (player.isReady) {
-                                    ready = <b>Ready!</b>;
-                                    readyUnitColor = "#73C373";
-                                } else {
-                                    ready = <b>Not Ready</b>;
-                                }
-                                return (
-                                    <div
-                                        className="readyUnit"
-                                        style={{ backgroundColor: readyUnitColor }}
-                                        key={index}
-                                    >
-                                        <p>
-                                            {index === 0 ? 'White' : 'Black'}: {player.name} {ready}
-                                        </p>
-                                    </div>
-                                );
-                            })}
-                        </ReactSortable>
-                    </div>
+                    <PlayerList players={players} setPlayers={setPlayers} />
                 )}
             </div>
         </div>
