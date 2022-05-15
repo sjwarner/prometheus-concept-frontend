@@ -17,23 +17,6 @@ const CreateGamePage = () => {
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        if (roomCode) {
-            const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
-                transports: ["websocket"]
-            });
-
-            console.log(newSocket);
-            setSocket(newSocket);
-        }
-    }, [baseUrl, roomCode])
-
-    useEffect(() => {
-        if (socket) {
-            joinParty();
-        }
-    }, [socket])
-
     const createParty = (username) => {
         if (!username) {
             setErrorMessage("Username must be set");
@@ -95,6 +78,23 @@ const CreateGamePage = () => {
             console.log("You've lost connection with the server");
         });
     };
+
+    useEffect(() => {
+        if (roomCode) {
+            const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
+                transports: ["websocket"]
+            });
+
+            console.log(newSocket);
+            setSocket(newSocket);
+        }
+    }, [baseUrl, roomCode])
+
+    useEffect(() => {
+        if (socket) {
+            joinParty();
+        }
+    }, [socket, joinParty])
 
     return(
         <div className="app p-8 flex flex-col justify-center items-center h-screen">
