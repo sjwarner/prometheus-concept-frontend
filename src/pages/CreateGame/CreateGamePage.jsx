@@ -17,12 +17,14 @@ const CreateGamePage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
-            transports: ["websocket"]
-        });
+        if (roomCode) {
+            const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
+                transports: ["websocket"]
+            });
 
-        console.log(newSocket);
-        setSocket(newSocket);
+            console.log(newSocket);
+            setSocket(newSocket);
+        }
     }, [baseUrl, roomCode])
 
     const createParty = (username) => {
