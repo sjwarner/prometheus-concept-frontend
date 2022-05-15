@@ -4,8 +4,7 @@ import { io } from "socket.io-client";
 import { ReactSortable } from "react-sortablejs";
 
 const CreateGamePage = () => {
-    // const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-    const baseUrl = "http://localhost:8000";
+    const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
     const [socket, setSocket] = useState(null);
     const [username, setUsername] = useState("");
     const [roomCode, setRoomCode] = useState(null);
