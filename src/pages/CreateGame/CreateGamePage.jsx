@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -41,7 +41,7 @@ const CreateGamePage = () => {
             });
     }
 
-    const joinParty = () => {
+    const joinParty = useCallback(() => {
         console.log('Joining party')
         socket.emit("setName", username);
 
@@ -76,6 +76,7 @@ const CreateGamePage = () => {
         socket.on("disconnected", function () {
             console.log("You've lost connection with the server");
         });
+    }, [socket, username]);
     };
 
     useEffect(() => {
