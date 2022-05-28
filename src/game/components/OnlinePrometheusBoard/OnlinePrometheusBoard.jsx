@@ -15,7 +15,9 @@ const OnlinePrometheusBoard = ({
   username,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
-  const [isPlayerTurn, setIsPlayerTurn] = useState(playerNumber === Players.PLAYER_ONE);
+  const [isPlayerTurn, setIsPlayerTurn] = useState(
+    playerNumber === Players.PLAYER_ONE
+  );
 
   const [spherePlaced, setSpherePlaced] = useState(false);
   // const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
@@ -48,19 +50,19 @@ const OnlinePrometheusBoard = ({
   }, [inProgress]);
 
   const makeMove = (rank, file) =>
-      !spherePlaced
-          ? addSphere(rank, file)
-          : originRank === null && originFile === null
-              ? selectCandidatePiece(rank, file)
-              : originRank === rank && originFile === file
-                  ? clearCandidatePiece()
-                  : movePiece(rank, file)
+    !spherePlaced
+      ? addSphere(rank, file)
+      : originRank === null && originFile === null
+      ? selectCandidatePiece(rank, file)
+      : originRank === rank && originFile === file
+      ? clearCandidatePiece()
+      : movePiece(rank, file);
 
-  socket.on("updatePlayerTurn", newPlayerTurnUsername => {
+  socket.on("updatePlayerTurn", (newPlayerTurnUsername) => {
     setIsPlayerTurn(newPlayerTurnUsername === username);
   });
 
-  socket.on("updateGameState", newGameState => {
+  socket.on("updateGameState", (newGameState) => {
     setGameState(newGameState);
   });
 
@@ -75,7 +77,10 @@ const OnlinePrometheusBoard = ({
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
-      tmp[rank][file] = playerNumber === Players.PLAYER_ONE ? Pieces.WHITE_SPHERE : Pieces.BLACK_SPHERE;
+      tmp[rank][file] =
+        playerNumber === Players.PLAYER_ONE
+          ? Pieces.WHITE_SPHERE
+          : Pieces.BLACK_SPHERE;
       setGameState(tmp);
       setSpherePlaced(true);
     }
