@@ -20,7 +20,7 @@ const OnlinePrometheusBoard = ({
   );
 
   const [spherePlaced, setSpherePlaced] = useState(false);
-  // const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
+
   // Stringify hack to deep clone InitialGameState - avoids mutation.
   // TODO: Use lodash here instead?
   const [gameState, setGameState] = useState(
@@ -83,10 +83,9 @@ const OnlinePrometheusBoard = ({
           : Pieces.BLACK_SPHERE;
       setGameState(tmp);
       setSpherePlaced(true);
-    }
 
-    socket.emit("playerSetSphere", playerNumber, gameState);
-    console.log(socket);
+      socket.emit("playerSetSphere", playerNumber, gameState);
+    }
     console.log("emmitted player set sphere");
   };
 
