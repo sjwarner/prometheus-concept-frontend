@@ -15,8 +15,7 @@ const OnlinePrometheusBoard = ({
   username,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
-  const [turn, setTurn] = useState(null);
-  const [isPlayerTurn, setIsPlayerTurn] = useState(turn === playerNumber);
+  const [isPlayerTurn, setIsPlayerTurn] = useState(playerNumber === Players.PLAYER_ONE);
 
   const [spherePlaced, setSpherePlaced] = useState(false);
   // const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
@@ -48,28 +47,20 @@ const OnlinePrometheusBoard = ({
     setPlayerTwoFirstTurn(true);
   }, [inProgress]);
 
-  useEffect(() => {
-    setIsPlayerTurn(turn === playerNumber);
-  }, [turn, playerNumber]);
-
-  const makeMove = (rank, file) => {
-    !spherePlaced
-      ? addSphere(rank, file)
-      : originRank === null && originFile === null
-      ? selectCandidatePiece(rank, file)
-      : originRank === rank && originFile === file
-      ? clearCandidatePiece()
-      : movePiece(rank, file);
-  };
+  const makeMove = (rank, file) =>
+      !spherePlaced
+          ? addSphere(rank, file)
+          : originRank === null && originFile === null
+              ? selectCandidatePiece(rank, file)
+              : originRank === rank && originFile === file
+                  ? clearCandidatePiece()
+                  : movePiece(rank, file)
 
   socket.on("updatePlayerTurn", newPlayerTurnUsername => {
-    console.log("Updating player turn")
     setIsPlayerTurn(newPlayerTurnUsername === username);
-    console.log("player turn updated to ", newPlayerTurnUsername);
   });
 
   socket.on("updateGameState", newGameState => {
-    console.log("Updating game state")
     setGameState(newGameState);
   });
 
@@ -97,10 +88,10 @@ const OnlinePrometheusBoard = ({
   const selectCandidatePiece = (rank, file) => {
     let candidatePiece = gameState[rank][file];
     if (
-      (turn === Players.PLAYER_ONE &&
+      (playerNumber === Players.PLAYER_ONE &&
         candidatePiece &&
         candidatePiece === candidatePiece.toUpperCase()) ||
-      (turn === Players.PLAYER_TWO &&
+      (playerNumber === Players.PLAYER_TWO &&
         candidatePiece &&
         candidatePiece === candidatePiece.toLowerCase())
     ) {
@@ -130,10 +121,10 @@ const OnlinePrometheusBoard = ({
         // setWinner(turn);
         setInProgress(false);
       }
-      if (playerOneFirstTurn && turn === Players.PLAYER_ONE) {
+      if (playerOneFirstTurn && playerNumber === Players.PLAYER_ONE) {
         setPlayerOneFirstTurn(false);
       }
-      if (playerTwoFirstTurn && turn === Players.PLAYER_TWO) {
+      if (playerTwoFirstTurn && playerNumber === Players.PLAYER_TWO) {
         setPlayerTwoFirstTurn(false);
       }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
@@ -142,9 +133,6 @@ const OnlinePrometheusBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
-      setTurn(
-        turn === Players.PLAYER_ONE ? Players.PLAYER_TWO : Players.PLAYER_ONE
-      );
     }
   };
 
