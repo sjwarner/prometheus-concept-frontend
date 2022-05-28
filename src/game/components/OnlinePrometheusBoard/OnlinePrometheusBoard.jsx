@@ -130,7 +130,7 @@ const OnlinePrometheusBoard = ({
       setValidMoves([]);
 
       if (winningMove) {
-        socket.emit("playerWon", gameState, username);
+        socket.emit("playerWon", gameState);
       } else {
         socket.emit("playerMovedPiece", gameState);
       }
