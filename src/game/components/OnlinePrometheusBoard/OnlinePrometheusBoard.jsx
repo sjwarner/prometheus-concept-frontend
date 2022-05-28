@@ -26,15 +26,12 @@ const OnlinePrometheusBoard = ({
   const [winner, setWinner] = useState(null);
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] = useState(false);
 
-  // const inProgressWithSpheresPlaced = inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
-
-  // const resetGame = () => {
-  //     setInProgress(true);
-  //     // setWinner(null);
-  //     setGameState(JSON.parse(JSON.stringify(InitialGameState)));
-  //     setPlayerOneSpherePlaced(false);
-  //     setPlayerTwoSpherePlaced(false);
-  // }
+  const resetGame = () => {
+      setInProgress(true);
+      setWinner(null);
+      setGameState(JSON.parse(JSON.stringify(InitialGameState)));
+      setIsSpherePlaced(false);
+  }
 
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
@@ -69,6 +66,10 @@ const OnlinePrometheusBoard = ({
 
   socket.on("opponentRequestedRematch", () => {
     setHasOpponentRequestedRematch(true);
+  });
+
+  socket.on("resetGame", () => {
+    resetGame();
   });
 
   const addSphere = (rank, file) => {
