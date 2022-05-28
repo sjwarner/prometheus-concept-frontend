@@ -15,18 +15,17 @@ const OnlinePrometheusBoard = ({ isGameStarted, playerNumber }) => {
     // Stringify hack to deep clone InitialGameState - avoids mutation.
     // TODO: Use lodash here instead?
     const [gameState, setGameState] = useState(JSON.parse(JSON.stringify(InitialGameState)));
-    const [winner, setWinner] = useState(null);
-    const [turn, setTurn] = useState(Players.PLAYER_ONE);
+    // const [winner, setWinner] = useState(null);
 
-    const inProgressWithSpheresPlaced = inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
+    // const inProgressWithSpheresPlaced = inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
 
-    const resetGame = () => {
-        setInProgress(true);
-        setWinner(null);
-        setGameState(JSON.parse(JSON.stringify(InitialGameState)));
-        setPlayerOneSpherePlaced(false);
-        setPlayerTwoSpherePlaced(false);
-    }
+    // const resetGame = () => {
+    //     setInProgress(true);
+    //     // setWinner(null);
+    //     setGameState(JSON.parse(JSON.stringify(InitialGameState)));
+    //     setPlayerOneSpherePlaced(false);
+    //     setPlayerTwoSpherePlaced(false);
+    // }
 
     const [originRank, setOriginRank] = useState(null);
     const [originFile, setOriginFile] = useState(null);
@@ -97,7 +96,7 @@ const OnlinePrometheusBoard = ({ isGameStarted, playerNumber }) => {
         if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
             let tmp = gameState;
             if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
-                setWinner(turn);
+                // setWinner(turn);
                 setInProgress(false);
             }
             if (playerOneFirstTurn && turn === Players.PLAYER_ONE) {
