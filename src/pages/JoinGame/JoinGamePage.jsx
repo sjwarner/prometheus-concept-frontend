@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
+import Players from "../../game/logic/Players";
+import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/OnlinePrometheusBoard";
+
 const JoinGamePage = () => {
   const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [socket, setSocket] = useState(null);
@@ -10,6 +13,7 @@ const JoinGamePage = () => {
   const [isReady, setIsReady] = useState(false);
   const [isInRoom, setIsInRoom] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [players, setPlayers] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
@@ -42,6 +46,10 @@ const JoinGamePage = () => {
       setIsLoading(false);
 
       socket.disconnect();
+    });
+
+    socket.on("partyUpdate", (players) => {
+      setPlayers(players);
     });
 
     socket.on("startGame", () => {
@@ -96,65 +104,75 @@ const JoinGamePage = () => {
 
   return (
     <div className="app p-8 flex flex-col justify-center items-center h-screen">
-      <div className="mb-4">
-        {!isGameStarted && (
-          <>
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+      {!isGameStarted && (
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="username"
+          >
+            Username
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Username"
+            disabled={isInRoom}
+            onChange={(evt) => setUsername(evt.target.value)}
+          />
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="username"
+          >
+            Room Code
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="roomCode"
+            type="text"
+            placeholder="Room Code"
+            disabled={isInRoom}
+            onChange={(evt) => setRoomCode(evt.target.value)}
+          />
+          {hasError && <div className="mt-4">{errorMessage}</div>}
+          {!isLoading && !isInRoom && (
+            <button
+              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              onClick={() => attemptJoinParty()}
+              disabled={isLoading}
             >
-              Username
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="Username"
-              disabled={isInRoom}
-              onChange={(evt) => setUsername(evt.target.value)}
-            />
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              Join game
+            </button>
+          )}
+
+          {isInRoom && !isReady && (
+            <button
+              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              onClick={() => reportReady()}
+              disabled={isReady}
             >
-              Room Code
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="roomCode"
-              type="text"
-              placeholder="Room Code"
-              disabled={isInRoom}
-              onChange={(evt) => setRoomCode(evt.target.value)}
-            />
-            {hasError && <div className="mt-4">{errorMessage}</div>}
-            {!isLoading && !isInRoom && (
-              <button
-                className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                onClick={() => attemptJoinParty()}
-                disabled={isLoading}
-              >
-                Join game
-              </button>
-            )}
+              Ready up!
+            </button>
+          )}
+          {isInRoom && isReady && (
+            <p className="block text-gray-700 m-4">Waiting for host...</p>
+          )}
+        </div>
+      )}
 
-            {isInRoom && !isReady && (
-              <button
-                className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                onClick={() => reportReady()}
-                disabled={isReady}
-              >
-                Ready up!
-              </button>
-            )}
-            {isInRoom && isReady && (
-              <p className="block text-gray-700 m-4">Waiting for host...</p>
-            )}
-          </>
-        )}
-
-        {isGameStarted && <p>Game started!</p>}
-      </div>
+      {isGameStarted && (
+        <OnlinePrometheusBoard
+          socket={socket}
+          isGameStarted={isGameStarted}
+          playerNumber={
+            players.findIndex((player) => player.name === username) === 0
+              ? Players.PLAYER_ONE
+              : Players.PLAYER_TWO
+          }
+          players={players}
+          username={username}
+        />
+      )}
     </div>
   );
 };
