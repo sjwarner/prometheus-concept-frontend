@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 import InitialGameState from "../../logic/InitialGameState";
 
-const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, username }) => {
+const OnlinePrometheusBoard = ({
+  socket,
+  isGameStarted,
+  playerNumber,
+  players,
+  username,
+}) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [turn, setTurn] = useState(null);
   const [isPlayerTurn, setIsPlayerTurn] = useState(turn === playerNumber);
@@ -69,7 +75,10 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
     let selectedSquare = gameState[rank][file];
 
     // Use correct function for either white or black
-    const selectedSquareCaseTransformed = playerNumber === "player_one" ? selectedSquare.toUpperCase() : selectedSquare.toLowerCase();
+    const selectedSquareCaseTransformed =
+      playerNumber === "player_one"
+        ? selectedSquare.toUpperCase()
+        : selectedSquare.toLowerCase();
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
@@ -80,7 +89,7 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
 
     socket.emit("playerSetSphere", playerNumber, gameState);
     console.log(socket);
-    console.log("emmitted player set sphere")
+    console.log("emmitted player set sphere");
   };
 
   const selectCandidatePiece = (rank, file) => {
