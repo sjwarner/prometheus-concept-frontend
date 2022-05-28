@@ -26,6 +26,7 @@ const OnlinePrometheusBoard = ({
     JSON.parse(JSON.stringify(InitialGameState))
   );
   const [winner, setWinner] = useState(null);
+  const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] = useState(false);
 
   // const inProgressWithSpheresPlaced = inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
 
@@ -66,6 +67,10 @@ const OnlinePrometheusBoard = ({
   socket.on("updatePlayerWon", (winningUsername) => {
     setWinner(winningUsername);
     setInProgress(false);
+  });
+
+  socket.on("opponentRequestedRematch", () => {
+    setHasOpponentRequestedRematch(true);
   });
 
   const addSphere = (rank, file) => {
@@ -194,6 +199,11 @@ const OnlinePrometheusBoard = ({
             >
               Rematch?
             </button>
+          )}
+          {!inProgress && hasOpponentRequestedRematch && (
+              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+              Opponent has requested rematch.
+            </span>
           )}
         </div>
       </div>
