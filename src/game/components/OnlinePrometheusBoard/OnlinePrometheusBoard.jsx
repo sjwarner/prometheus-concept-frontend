@@ -26,7 +26,7 @@ const OnlinePrometheusBoard = ({
   const [gameState, setGameState] = useState(
     JSON.parse(JSON.stringify(InitialGameState))
   );
-  // const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState(null);
 
   // const inProgressWithSpheresPlaced = inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
 
@@ -63,6 +63,10 @@ const OnlinePrometheusBoard = ({
   socket.on("updateGameState", (newGameState) => {
     setGameState(newGameState);
   });
+
+  socket.on("updatePlayerWon", (winningUsername) => {
+    setWinner(winningUsername);
+  })
 
   const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
@@ -117,8 +121,9 @@ const OnlinePrometheusBoard = ({
   const movePiece = (destinationRank, destinationFile) => {
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
       let tmp = gameState;
+      let winningMove = false;
       if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
-        // setWinner(turn);
+        winningMove = true;
         setInProgress(false);
       }
       if (firstTurn) {
@@ -131,7 +136,11 @@ const OnlinePrometheusBoard = ({
       setOriginFile(null);
       setValidMoves([]);
 
-      socket.emit("playerMovedPiece", gameState);
+      if (winningMove) {
+        socket.emit("playerWon", gameState, username);
+      } else {
+        socket.emit("playerMovedPiece", gameState);
+      }
     }
   };
 
