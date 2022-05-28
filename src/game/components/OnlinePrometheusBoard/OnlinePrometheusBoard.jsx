@@ -84,7 +84,7 @@ const OnlinePrometheusBoard = ({
       setGameState(tmp);
       setSpherePlaced(true);
 
-      socket.emit("playerMovedPiece", playerNumber, gameState);
+      socket.emit("playerMovedPiece", gameState);
     }
   };
 
