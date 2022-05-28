@@ -14,9 +14,7 @@ const OnlinePrometheusBoard = ({
   username,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
-  const [isPlayerTurn, setIsPlayerTurn] = useState(
-    playerNumber === Players.PLAYER_ONE
-  );
+  const [isPlayerTurn, setIsPlayerTurn] = useState(null);
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
