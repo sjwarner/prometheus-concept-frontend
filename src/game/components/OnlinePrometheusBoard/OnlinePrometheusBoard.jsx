@@ -24,14 +24,15 @@ const OnlinePrometheusBoard = ({
     JSON.parse(JSON.stringify(InitialGameState))
   );
   const [winner, setWinner] = useState(null);
-  const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] = useState(false);
+  const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
+    useState(false);
 
   const resetGame = () => {
-      setInProgress(true);
-      setWinner(null);
-      setGameState(JSON.parse(JSON.stringify(InitialGameState)));
-      setIsSpherePlaced(false);
-  }
+    setInProgress(true);
+    setWinner(null);
+    setGameState(JSON.parse(JSON.stringify(InitialGameState)));
+    setIsSpherePlaced(false);
+  };
 
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
@@ -200,7 +201,7 @@ const OnlinePrometheusBoard = ({
             </button>
           )}
           {!inProgress && hasOpponentRequestedRematch && (
-              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+            <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
               Opponent has requested rematch.
             </span>
           )}
