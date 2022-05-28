@@ -54,9 +54,9 @@ const JoinGamePage = () => {
             console.log(participants);
             setPlayers(participants);
 
-            const readyPlayers = players.map((player) => player.isReady).filter((x) => x === true).length;
+            const readyPlayers = players?.map((player) => player.isReady).filter((x) => x === true).length;
 
-            if (players.length === 2 && readyPlayers === players.length) {
+            if (players && players.length === 2 && readyPlayers === players.length) {
                 setCanStart(true);
             } else {
                 setCanStart(false);
