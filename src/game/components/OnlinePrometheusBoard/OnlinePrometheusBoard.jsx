@@ -5,9 +5,10 @@ import Players from "../../logic/Players";
 import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
 import InitialGameState from "../../logic/InitialGameState";
 
-const OnlinePrometheusBoard = ({ isGameStarted }) => {
+const OnlinePrometheusBoard = ({ isGameStarted, playerNumber }) => {
     const [inProgress, setInProgress] = useState(isGameStarted);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+    const [turn, setTurn] = useState(Players.PLAYER_ONE);
+    const [isPlayerTurn, setIsPlayerTurn] = useState(turn === playerNumber);
 
     const [playerOneSpherePlaced, setPlayerOneSpherePlaced] = useState(false);
     const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
@@ -37,6 +38,10 @@ const OnlinePrometheusBoard = ({ isGameStarted }) => {
         setPlayerOneFirstTurn(true);
         setPlayerTwoFirstTurn(true);
     }, [inProgress])
+
+    useEffect(() => {
+        setIsPlayerTurn(turn === playerNumber)
+    }, [turn, playerNumber])
 
     const makeMove = (rank, file) => {
         !playerOneSpherePlaced
