@@ -9,18 +9,21 @@ import JoinGamePage from "./pages/JoinGame/JoinGamePage";
 
 function App() {
   return (
-      <div className="app">
-        <Router>
-          <div>
-            <Routes>
-              <Route path="/create" element={<CreateGamePage />} />
-              <Route path="/join" element={<JoinGamePage />} />
-              <Route path="/local-multiplayer" element={<LocalMultiplayerPage />} />
-              <Route path="/" element={<Homepage />} />
-            </Routes>
-          </div>
-        </Router>
-      </div>
+    <div className="app">
+      <Router>
+        <div>
+          <Routes>
+            <Route path="/create" element={<CreateGamePage />} />
+            <Route path="/join" element={<JoinGamePage />} />
+            <Route
+              path="/local-multiplayer"
+              element={<LocalMultiplayerPage />}
+            />
+            <Route path="/" element={<Homepage />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   );
 }
 

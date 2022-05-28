@@ -7,6 +7,6 @@ const Pieces = {
   WHITE_TETRAHEDRON: "T",
   WHITE_PYRAMID: "P",
   WHITE_CUBE: "C",
-}
+};
 
 export default Pieces;
