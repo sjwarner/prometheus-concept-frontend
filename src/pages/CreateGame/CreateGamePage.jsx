@@ -5,6 +5,8 @@ import {io} from "socket.io-client";
 import PlayerList from "../../general/components/PlayerList/PlayerList";
 import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/OnlinePrometheusBoard";
 
+import Players from "../../game/logic/Players";
+
 const CreateGamePage = () => {
     const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
     const [socket, setSocket] = useState(null);
@@ -155,7 +157,8 @@ const CreateGamePage = () => {
             )}
 
             {isGameStarted && (
-                <OnlinePrometheusBoard isGameStarted={isGameStarted} />
+                <OnlinePrometheusBoard isGameStarted={isGameStarted}
+                                       playerNum={players.findIndex(player => player.name === username) === 0 ? Players.PLAYER_ONE : Players.PLAYER_TWO} />
             )}
         </div>
     );
