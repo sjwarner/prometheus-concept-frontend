@@ -10,8 +10,8 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
   const [turn, setTurn] = useState(Players.PLAYER_ONE);
   const [isPlayerTurn, setIsPlayerTurn] = useState(turn === playerNumber);
 
-  const [playerOneSpherePlaced, setPlayerOneSpherePlaced] = useState(false);
-  const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
+  const [spherePlaced, setSpherePlaced] = useState(false);
+  // const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
   // Stringify hack to deep clone InitialGameState - avoids mutation.
   // TODO: Use lodash here instead?
   const [gameState, setGameState] = useState(
@@ -45,10 +45,8 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
   }, [turn, playerNumber]);
 
   const makeMove = (rank, file) => {
-    !playerOneSpherePlaced
-      ? addPlayerOneSphere(rank, file)
-      : !playerTwoSpherePlaced
-      ? addPlayerTwoSphere(rank, file)
+    !spherePlaced
+      ? addSphere(rank, file)
       : originRank === null && originFile === null
       ? selectCandidatePiece(rank, file)
       : originRank === rank && originFile === file
@@ -61,30 +59,22 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
     console.log('player turn updated to ', newPlayerTurnUsername)
   })
 
-  const addPlayerOneSphere = (rank, file) => {
-    // Sphere has to replace one of Player One's pieces.
+  const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
-    if (selectedSquare && selectedSquare === selectedSquare.toUpperCase()) {
+
+    // Use correct function for either white or black
+    const selectedSquareCaseTransformed = playerNumber === "player_one" ? selectedSquare.toUpperCase() : selectedSquare.toLowerCase();
+
+    if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
       tmp[rank][file] = Pieces.WHITE_SPHERE;
       setGameState(tmp);
-      setPlayerOneSpherePlaced(true);
+      setSpherePlaced(true);
     }
 
     socket.emit("playerSetSphere", playerNumber, gameState);
     console.log(socket);
     console.log("emmitted player set sphere")
-  };
-
-  const addPlayerTwoSphere = (rank, file) => {
-    // Sphere has to replace one of Player Two's pieces.
-    let selectedSquare = gameState[rank][file];
-    if (selectedSquare && selectedSquare === selectedSquare.toLowerCase()) {
-      let tmp = gameState;
-      tmp[rank][file] = Pieces.BLACK_SPHERE;
-      setGameState(tmp);
-      setPlayerTwoSpherePlaced(true);
-    }
   };
 
   const selectCandidatePiece = (rank, file) => {
