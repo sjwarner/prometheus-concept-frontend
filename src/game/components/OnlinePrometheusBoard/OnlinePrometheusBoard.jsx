@@ -66,6 +66,7 @@ const OnlinePrometheusBoard = ({
 
   socket.on("updatePlayerWon", (winningUsername) => {
     setWinner(winningUsername);
+    setInProgress(false);
   })
 
   const addSphere = (rank, file) => {
@@ -124,7 +125,6 @@ const OnlinePrometheusBoard = ({
       let winningMove = false;
       if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
         winningMove = true;
-        setInProgress(false);
       }
       if (firstTurn) {
         setFirstTurn(false);
