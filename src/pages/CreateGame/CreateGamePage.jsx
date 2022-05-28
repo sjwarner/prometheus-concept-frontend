@@ -155,7 +155,7 @@ const CreateGamePage = () => {
             )}
 
             {isGameStarted && (
-                <OnlinePrometheusBoard/>
+                <OnlinePrometheusBoard isGameStarted={isGameStarted} />
             )}
         </div>
     );
