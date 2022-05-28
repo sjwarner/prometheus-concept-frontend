@@ -5,7 +5,7 @@ import InitialGameState from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
-import {calculateValidMovesOnline, isArrayInArray} from "../../logic/utils";
+import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -98,7 +98,7 @@ const OnlinePrometheusBoard = ({
     ) {
       setOriginRank(rank);
       setOriginFile(file);
-      calculateValidMovesOnline(
+      calculateValidMoves(
         rank,
         file,
         gameState,

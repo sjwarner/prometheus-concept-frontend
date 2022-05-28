@@ -79,8 +79,7 @@ const PrometheusBoard = ({
         file,
         gameState,
         setValidMoves,
-        playerOneFirstTurn,
-        playerTwoFirstTurn
+        playerOneFirstTurn || playerTwoFirstTurn
       );
     }
   };

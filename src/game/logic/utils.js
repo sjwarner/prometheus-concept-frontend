@@ -1,62 +1,6 @@
 import Pieces from "./Pieces";
 
 export const calculateValidMoves = (
-  rank,
-  file,
-  gameState,
-  setValidMoves,
-  playerOneFirstTurn,
-  playerTwoFirstTurn
-) => {
-  const piece = gameState[rank][file];
-  const movement = movementSpeed(piece);
-  let validMoves = [];
-
-  addValidMoves(
-    rank,
-    file - 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // up
-  addValidMoves(
-    rank + 1,
-    file,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // right
-  addValidMoves(
-    rank,
-    file + 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // down
-  addValidMoves(
-    rank - 1,
-    file,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // left
-
-  setValidMoves(validMoves);
-};
-
-export const calculateValidMovesOnline = (
     rank,
     file,
     gameState,
@@ -67,7 +11,7 @@ export const calculateValidMovesOnline = (
   const movement = movementSpeed(piece);
   let validMoves = [];
 
-  addValidMovesOnline(
+  addValidMoves(
       rank,
       file - 1,
       movement - 1,
@@ -76,7 +20,7 @@ export const calculateValidMovesOnline = (
       gameState,
       firstTurn
   ); // up
-  addValidMovesOnline(
+  addValidMoves(
       rank + 1,
       file,
       movement - 1,
@@ -85,7 +29,7 @@ export const calculateValidMovesOnline = (
       gameState,
       firstTurn
   ); // right
-  addValidMovesOnline(
+  addValidMoves(
       rank,
       file + 1,
       movement - 1,
@@ -94,7 +38,7 @@ export const calculateValidMovesOnline = (
       gameState,
       firstTurn
   ); // down
-  addValidMovesOnline(
+  addValidMoves(
       rank - 1,
       file,
       movement - 1,
@@ -108,73 +52,6 @@ export const calculateValidMovesOnline = (
 };
 
 const addValidMoves = (
-  x,
-  y,
-  movement,
-  validMoves,
-  piece,
-  gameState,
-  playerOneFirstTurn,
-  playerTwoFirstTurn
-) => {
-  if (7 < x || x < 0 || 7 < y || y < 0) return;
-
-  if (gameState[x][y] && (playerOneFirstTurn || playerTwoFirstTurn)) return; // Can't take a piece on your first turn
-  if (gameState[x][y] && isPlayerPiece(gameState[x][y], piece)) return; // Abort if hits own piece
-  if (gameState[x][y]) {
-    validMoves.push([x, y]);
-    return;
-  } // Mark valid and abort if hit opponent piece
-  if (movement === 0) {
-    validMoves.push([x, y]);
-    return;
-  } // Final move terminates
-
-  validMoves.push([x, y]);
-
-  addValidMoves(
-    x,
-    y - 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // up
-  addValidMoves(
-    x + 1,
-    y,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // right
-  addValidMoves(
-    x,
-    y + 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // down
-  addValidMoves(
-    x - 1,
-    y,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    playerOneFirstTurn,
-    playerTwoFirstTurn
-  ); // left
-};
-
-const addValidMovesOnline = (
     x,
     y,
     movement,
@@ -198,7 +75,7 @@ const addValidMovesOnline = (
 
   validMoves.push([x, y]);
 
-  addValidMovesOnline(
+  addValidMoves(
       x,
       y - 1,
       movement - 1,
@@ -207,7 +84,7 @@ const addValidMovesOnline = (
       gameState,
       firstTurn
   ); // up
-  addValidMovesOnline(
+  addValidMoves(
       x + 1,
       y,
       movement - 1,
@@ -216,7 +93,7 @@ const addValidMovesOnline = (
       gameState,
       firstTurn
   ); // right
-  addValidMovesOnline(
+  addValidMoves(
       x,
       y + 1,
       movement - 1,
@@ -225,7 +102,7 @@ const addValidMovesOnline = (
       gameState,
       firstTurn
   ); // down
-  addValidMovesOnline(
+  addValidMoves(
       x - 1,
       y,
       movement - 1,
