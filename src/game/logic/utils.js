@@ -11,6 +11,10 @@ export const calculateValidMoves = (
   const movement = movementSpeed(piece);
   let validMoves = [];
 
+  if (piece === Pieces.WHITE_SPHERE || piece === Pieces.BLACK_SPHERE) {
+    return;
+  }
+
   addValidMoves(
     rank,
     file - 1,
