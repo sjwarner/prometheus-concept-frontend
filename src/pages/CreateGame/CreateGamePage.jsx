@@ -46,11 +46,9 @@ const CreateGamePage = () => {
   };
 
   const joinParty = useCallback(() => {
-    console.log("Joining party");
     socket.emit("setName", username);
 
     socket.on("joinSuccess", () => {
-      console.log("join successful");
       setIsLoading(false);
       setIsInRoom(true);
     });
@@ -97,7 +95,6 @@ const CreateGamePage = () => {
         transports: ["websocket"],
       });
 
-      console.log(newSocket);
       setSocket(newSocket);
     }
   }, [baseUrl, roomCode]);

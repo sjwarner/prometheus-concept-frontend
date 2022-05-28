@@ -24,7 +24,6 @@ const JoinGamePage = () => {
       transports: ["websocket"],
     });
 
-    console.log(newSocket);
     setSocket(newSocket);
   }, [baseUrl, roomCode]);
 
@@ -32,15 +31,11 @@ const JoinGamePage = () => {
     socket.emit("setName", username);
 
     socket.on("joinSuccess", function () {
-      console.log("join successful");
-
       setIsLoading(false);
       setIsInRoom(true);
     });
 
     socket.on("joinFailed", function (err) {
-      console.log("join failed, cause: " + err);
-
       setErrorMessage(err);
       setHasError(true);
       setIsLoading(false);
