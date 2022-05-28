@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { io } from "socket.io-client";
+import {io} from "socket.io-client";
 
 const JoinGamePage = () => {
     const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
