@@ -5,7 +5,7 @@ import InitialGameState from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
-import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
+import {calculateValidMovesOnline, isArrayInArray} from "../../logic/utils";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -40,13 +40,11 @@ const OnlinePrometheusBoard = ({
 
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
-  const [playerOneFirstTurn, setPlayerOneFirstTurn] = useState(true);
-  const [playerTwoFirstTurn, setPlayerTwoFirstTurn] = useState(true);
+  const [firstTurn, setFirstTurn] = useState(true);
   const [validMoves, setValidMoves] = useState([]);
 
   useEffect(() => {
-    setPlayerOneFirstTurn(true);
-    setPlayerTwoFirstTurn(true);
+    setFirstTurn(true);
   }, [inProgress]);
 
   const makeMove = (rank, file) =>
@@ -100,13 +98,12 @@ const OnlinePrometheusBoard = ({
     ) {
       setOriginRank(rank);
       setOriginFile(file);
-      calculateValidMoves(
+      calculateValidMovesOnline(
         rank,
         file,
         gameState,
         setValidMoves,
-        playerOneFirstTurn,
-        playerTwoFirstTurn
+        firstTurn
       );
     }
   };
@@ -124,11 +121,8 @@ const OnlinePrometheusBoard = ({
         // setWinner(turn);
         setInProgress(false);
       }
-      if (playerOneFirstTurn && playerNumber === Players.PLAYER_ONE) {
-        setPlayerOneFirstTurn(false);
-      }
-      if (playerTwoFirstTurn && playerNumber === Players.PLAYER_TWO) {
-        setPlayerTwoFirstTurn(false);
+      if (firstTurn) {
+        setFirstTurn(false);
       }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
       tmp[originRank][originFile] = "";

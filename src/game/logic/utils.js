@@ -56,6 +56,57 @@ export const calculateValidMoves = (
   setValidMoves(validMoves);
 };
 
+export const calculateValidMovesOnline = (
+    rank,
+    file,
+    gameState,
+    setValidMoves,
+    firstTurn
+) => {
+  const piece = gameState[rank][file];
+  const movement = movementSpeed(piece);
+  let validMoves = [];
+
+  addValidMovesOnline(
+      rank,
+      file - 1,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // up
+  addValidMovesOnline(
+      rank + 1,
+      file,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // right
+  addValidMovesOnline(
+      rank,
+      file + 1,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // down
+  addValidMovesOnline(
+      rank - 1,
+      file,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // left
+
+  setValidMoves(validMoves);
+};
+
 const addValidMoves = (
   x,
   y,
@@ -120,6 +171,68 @@ const addValidMoves = (
     gameState,
     playerOneFirstTurn,
     playerTwoFirstTurn
+  ); // left
+};
+
+const addValidMovesOnline = (
+    x,
+    y,
+    movement,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
+) => {
+  if (7 < x || x < 0 || 7 < y || y < 0) return;
+
+  if (gameState[x][y] && firstTurn) return; // Can't take a piece on your first turn
+  if (gameState[x][y] && isPlayerPiece(gameState[x][y], piece)) return; // Abort if hits own piece
+  if (gameState[x][y]) {
+    validMoves.push([x, y]);
+    return;
+  } // Mark valid and abort if hit opponent piece
+  if (movement === 0) {
+    validMoves.push([x, y]);
+    return;
+  } // Final move terminates
+
+  validMoves.push([x, y]);
+
+  addValidMovesOnline(
+      x,
+      y - 1,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // up
+  addValidMovesOnline(
+      x + 1,
+      y,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // right
+  addValidMovesOnline(
+      x,
+      y + 1,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
+  ); // down
+  addValidMovesOnline(
+      x - 1,
+      y,
+      movement - 1,
+      validMoves,
+      piece,
+      gameState,
+      firstTurn
   ); // left
 };
 
