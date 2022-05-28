@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
+
+import InitialGameState from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
+
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
-import InitialGameState from "../../logic/InitialGameState";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -76,13 +78,13 @@ const OnlinePrometheusBoard = ({
 
     // Use correct function for either white or black
     const selectedSquareCaseTransformed =
-      playerNumber === "player_one"
+      playerNumber === Players.PLAYER_ONE
         ? selectedSquare.toUpperCase()
         : selectedSquare.toLowerCase();
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
-      tmp[rank][file] = playerNumber === "player_one" ? Pieces.WHITE_SPHERE : Pieces.BLACK_SPHERE;
+      tmp[rank][file] = playerNumber === Players.PLAYER_ONE ? Pieces.WHITE_SPHERE : Pieces.BLACK_SPHERE;
       setGameState(tmp);
       setSpherePlaced(true);
     }
