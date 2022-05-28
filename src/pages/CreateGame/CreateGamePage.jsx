@@ -65,7 +65,6 @@ const CreateGamePage = () => {
     });
 
     socket.on("partyUpdate", (players) => {
-      console.log(players);
       setPlayers(players);
 
       const readyPlayers = players
@@ -171,8 +170,8 @@ const CreateGamePage = () => {
               ? Players.PLAYER_ONE
               : Players.PLAYER_TWO
           }
-          players = {players}
-          username = {username}
+          players={players}
+          username={username}
         />
       )}
     </div>
