@@ -54,10 +54,16 @@ const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, u
       : movePiece(rank, file);
   };
 
-  socket.on("updatePlayerTurn", (newPlayerTurnUsername) => {
+  socket.on("updatePlayerTurn", newPlayerTurnUsername => {
+    console.log("Updating player turn")
     setIsPlayerTurn(newPlayerTurnUsername === username);
-    console.log('player turn updated to ', newPlayerTurnUsername)
-  })
+    console.log("player turn updated to ", newPlayerTurnUsername);
+  });
+
+  socket.on("updateGameState", newGameState => {
+    console.log("Updating game state")
+    setGameState(newGameState);
+  });
 
   const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
