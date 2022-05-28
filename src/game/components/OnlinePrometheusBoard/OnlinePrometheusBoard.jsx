@@ -136,6 +136,8 @@ const OnlinePrometheusBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
+
+      socket.emit("playerMovedPiece", gameState);
     }
   };
 
