@@ -9,9 +9,7 @@ const JoinGamePage = () => {
     const [roomCode, setRoomCode] = useState(null);
     const [isReady, setIsReady] = useState(false);
     const [isInRoom, setIsInRoom] = useState(false);
-    const [canStart, setCanStart] = useState(false);
     const [isGameStarted, setIsGameStarted] = useState(false);
-    const [players, setPlayers] = useState(null);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [hasError, setHasError] = useState(false);
@@ -50,19 +48,6 @@ const JoinGamePage = () => {
             setIsGameStarted(true);
         });
 
-        socket.on("partyUpdate", (participants) => {
-            console.log(participants);
-            setPlayers(participants);
-
-            const readyPlayers = players?.map((player) => player.isReady).filter((x) => x === true).length;
-
-            if (players && players.length === 2 && readyPlayers === players.length) {
-                setCanStart(true);
-            } else {
-                setCanStart(false);
-            }
-        });
-
         socket.on("disconnected", function () {
             console.log("You've lost connection with the server");
         });
@@ -70,16 +55,12 @@ const JoinGamePage = () => {
 
     const attemptJoinParty = () => {
         if (!username) {
-            console.log("Please enter a name");
-
             setErrorMessage("Name must be set");
             setHasError(true);
             return;
         }
 
         if (!roomCode) {
-            console.log("Please enter a room code");
-
             setErrorMessage("Room code must be specified");
             setHasError(true);
             return;
@@ -90,30 +71,18 @@ const JoinGamePage = () => {
         axios
             .get(`${baseUrl}/exists/${roomCode}`)
             .then(function (res) {
-                console.log(res);
-
                 if (res.data.exists) {
-                    // Join the room
-                    console.log("joining");
-
-                    // TODO: Do we need to reset this here?
-                    // setIsLoading(false);
                     setErrorMessage("");
                     joinParty();
                 } else {
-                    //TODO  handle error
-                    console.log("Invalid Party Code");
-
                     setIsLoading(false);
                     setErrorMessage("Invalid Party Code")
                     setHasError(true);
                 }
             })
             .catch(function (err) {
-                console.log("Error in getting exists", err);
-
                 setIsLoading(false);
-                setErrorMessage("Server error")
+                setErrorMessage("Server error: " + err)
                 setHasError(true);
             });
     };
