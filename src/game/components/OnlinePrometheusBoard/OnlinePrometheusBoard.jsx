@@ -82,7 +82,7 @@ const OnlinePrometheusBoard = ({
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
-      tmp[rank][file] = Pieces.WHITE_SPHERE;
+      tmp[rank][file] = playerNumber === "player_one" ? Pieces.WHITE_SPHERE : Pieces.BLACK_SPHERE;
       setGameState(tmp);
       setSpherePlaced(true);
     }
