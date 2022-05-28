@@ -164,7 +164,6 @@ const JoinGamePage = () => {
               ? Players.PLAYER_ONE
               : Players.PLAYER_TWO
           }
-          players={players}
           username={username}
         />
       )}

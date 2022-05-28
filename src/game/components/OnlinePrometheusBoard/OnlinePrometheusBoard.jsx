@@ -11,7 +11,6 @@ const OnlinePrometheusBoard = ({
   socket,
   isGameStarted,
   playerNumber,
-  players,
   username,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
