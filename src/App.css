@@ -1,13 +1,12 @@
 .app {
   text-align: center;
-  padding: 2rem;
 }
 
 .board {
   margin: auto;
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
 }
 
 .board:after {
@@ -40,19 +39,27 @@
 }
 
 .square-selected {
-  background-image: linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0.5));
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.5),
+    rgba(255, 0, 0, 0.5)
+  );
 }
 
 .square-valid {
-  background-image: linear-gradient(to right, rgba(0,255,0,0.5), rgba(0,255,0,0.5));
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 255, 0, 0.5),
+    rgba(0, 255, 0, 0.5)
+  );
 }
 
 .sphere {
-  height:80%;
-  border-radius:50%;
-  -moz-border-radius:50%;
-  -webkit-border-radius:50%;
-  width:80%;
+  height: 80%;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 80%;
   margin: 10%;
 }
 
