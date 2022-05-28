@@ -7,7 +7,7 @@ import InitialGameState from "../../logic/InitialGameState";
 
 const OnlinePrometheusBoard = ({ socket, isGameStarted, playerNumber, players, username }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
-  const [turn, setTurn] = useState(Players.PLAYER_ONE);
+  const [turn, setTurn] = useState(null);
   const [isPlayerTurn, setIsPlayerTurn] = useState(turn === playerNumber);
 
   const [spherePlaced, setSpherePlaced] = useState(false);
