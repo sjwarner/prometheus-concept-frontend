@@ -1,64 +1,64 @@
 import Pieces from "./Pieces";
 
 export const calculateValidMoves = (
-    rank,
-    file,
-    gameState,
-    setValidMoves,
-    firstTurn
+  rank,
+  file,
+  gameState,
+  setValidMoves,
+  firstTurn
 ) => {
   const piece = gameState[rank][file];
   const movement = movementSpeed(piece);
   let validMoves = [];
 
   addValidMoves(
-      rank,
-      file - 1,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    rank,
+    file - 1,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // up
   addValidMoves(
-      rank + 1,
-      file,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    rank + 1,
+    file,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // right
   addValidMoves(
-      rank,
-      file + 1,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    rank,
+    file + 1,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // down
   addValidMoves(
-      rank - 1,
-      file,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    rank - 1,
+    file,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // left
 
   setValidMoves(validMoves);
 };
 
 const addValidMoves = (
-    x,
-    y,
-    movement,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
+  x,
+  y,
+  movement,
+  validMoves,
+  piece,
+  gameState,
+  firstTurn
 ) => {
   if (7 < x || x < 0 || 7 < y || y < 0) return;
 
@@ -76,40 +76,40 @@ const addValidMoves = (
   validMoves.push([x, y]);
 
   addValidMoves(
-      x,
-      y - 1,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    x,
+    y - 1,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // up
   addValidMoves(
-      x + 1,
-      y,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    x + 1,
+    y,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // right
   addValidMoves(
-      x,
-      y + 1,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    x,
+    y + 1,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // down
   addValidMoves(
-      x - 1,
-      y,
-      movement - 1,
-      validMoves,
-      piece,
-      gameState,
-      firstTurn
+    x - 1,
+    y,
+    movement - 1,
+    validMoves,
+    piece,
+    gameState,
+    firstTurn
   ); // left
 };
 

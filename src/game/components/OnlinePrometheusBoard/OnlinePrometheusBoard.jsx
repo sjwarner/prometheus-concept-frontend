@@ -5,7 +5,7 @@ import InitialGameState from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
-import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
+import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -66,7 +66,7 @@ const OnlinePrometheusBoard = ({
   socket.on("updatePlayerWon", (winningUsername) => {
     setWinner(winningUsername);
     setInProgress(false);
-  })
+  });
 
   const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
@@ -102,13 +102,7 @@ const OnlinePrometheusBoard = ({
     ) {
       setOriginRank(rank);
       setOriginFile(file);
-      calculateValidMoves(
-        rank,
-        file,
-        gameState,
-        setValidMoves,
-        firstTurn
-      );
+      calculateValidMoves(rank, file, gameState, setValidMoves, firstTurn);
     }
   };
 
@@ -172,31 +166,34 @@ const OnlinePrometheusBoard = ({
           })}
         <div className="below-board-container mt-4">
           {winner && (
-              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
-            {winner} won!
-          </span>
+            <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+              {winner} won!
+            </span>
           )}
           {inProgress && isPlayerTurn && !isSpherePlaced && (
-              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
-            Place your sphere.
-          </span>
+            <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+              Place your sphere.
+            </span>
           )}
           {inProgress && isPlayerTurn && isSpherePlaced && (
-              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
-            Make your move!
-          </span>
+            <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+              Make your move!
+            </span>
           )}
           {inProgress && !isPlayerTurn && (
-              <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
-            Waiting for opponent...
-          </span>
+            <span className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4">
+              Waiting for opponent...
+            </span>
           )}
           {!inProgress && (
-              <button
-                  className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                  onClick={() => {socket.emit("requestRematch", username)}}>
-                Rematch?
-              </button>
+            <button
+              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              onClick={() => {
+                socket.emit("requestRematch", username);
+              }}
+            >
+              Rematch?
+            </button>
           )}
         </div>
       </div>
