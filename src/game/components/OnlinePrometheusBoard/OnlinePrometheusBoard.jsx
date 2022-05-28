@@ -86,7 +86,6 @@ const OnlinePrometheusBoard = ({
 
       socket.emit("playerSetSphere", playerNumber, gameState);
     }
-    console.log("emmitted player set sphere");
   };
 
   const selectCandidatePiece = (rank, file) => {
