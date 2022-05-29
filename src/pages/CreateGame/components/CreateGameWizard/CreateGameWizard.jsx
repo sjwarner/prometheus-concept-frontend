@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PlayerList from "../../../../general/components/PlayerList/PlayerList";
-import axios from "axios";
+import { createParty, startGame } from "../../utils/createGameUtils";
 
 const CreateGameWizard = ({
   baseUrl,
@@ -19,38 +19,6 @@ const CreateGameWizard = ({
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
-
-  const createParty = (username) => {
-    if (!username) {
-      setErrorMessage("Username must be set");
-      setHasError(true);
-      return;
-    }
-
-    setHasError(false);
-    setIsLoading(true);
-
-    axios
-      .get(`${baseUrl}/createNamespace`)
-      .then((res) => {
-        setIsLoading(false);
-        setRoomCode(res.data.namespace);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-        setErrorMessage("Error creating room, server is unreachable");
-        setHasError(true);
-      });
-  };
-
-  const startGame = () => {
-    socket.emit("startGameSignal", players);
-
-    socket.on("startGame", () => {
-      setIsGameStarted(true);
-    });
-  };
 
   return (
     <div className="mb-4">
@@ -72,7 +40,16 @@ const CreateGameWizard = ({
       {!isLoading && !roomCode && (
         <button
           className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => createParty(username)}
+          onClick={() =>
+            createParty(
+              baseUrl,
+              username,
+              setErrorMessage,
+              setHasError,
+              setIsLoading,
+              setRoomCode
+            )
+          }
         >
           Create game
         </button>
@@ -95,7 +72,7 @@ const CreateGameWizard = ({
       {canStart && (
         <button
           className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => startGame()}
+          onClick={() => startGame(socket, players, setIsGameStarted)}
         >
           Start Game
         </button>
