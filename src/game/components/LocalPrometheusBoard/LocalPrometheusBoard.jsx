@@ -119,7 +119,7 @@ const LocalPrometheusBoard = ({
   };
 
   return (
-    <div className="board flex flex-col md:flex-row">
+    <div className="board flex flex-row">
       <div className="content">
         {Array(8)
           .fill(1)
