@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { attemptJoinParty, reportReady } from "../../utils/joinGameUtils";
 
 const JoinGameWizard = ({
   baseUrl,
@@ -17,77 +17,6 @@ const JoinGameWizard = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const joinParty = () => {
-    socket.emit("setName", username);
-
-    socket.on("joinSuccess", function () {
-      setIsLoading(false);
-      setIsInRoom(true);
-    });
-
-    socket.on("joinFailed", function (err) {
-      setErrorMessage(err);
-      setHasError(true);
-      setIsLoading(false);
-
-      socket.disconnect();
-    });
-
-    socket.on("partyUpdate", (players) => {
-      setPlayers(players);
-    });
-
-    socket.on("startGame", () => {
-      setIsGameStarted(true);
-    });
-
-    socket.on("disconnect", function () {
-      console.log("You've lost connection with the server");
-      socket.close();
-    });
-  };
-
-  const attemptJoinParty = () => {
-    if (!username) {
-      setErrorMessage("Name must be set");
-      setHasError(true);
-      return;
-    }
-
-    if (!roomCode) {
-      setErrorMessage("Room code must be specified");
-      setHasError(true);
-      return;
-    }
-
-    setIsLoading(true);
-
-    axios
-      .get(`${baseUrl}/exists/${roomCode}`)
-      .then(function (res) {
-        if (res.data.exists) {
-          setErrorMessage("");
-          joinParty();
-        } else {
-          setIsLoading(false);
-          setErrorMessage("Invalid Party Code");
-          setHasError(true);
-        }
-      })
-      .catch(function (err) {
-        setIsLoading(false);
-        setErrorMessage("Server error: " + err);
-        setHasError(true);
-      });
-  };
-
-  const reportReady = () => {
-    socket.emit("setReady", true);
-    socket.on("readyConfirm", () => {
-      setIsReady(true);
-    });
-  };
 
   return (
     <div className="mb-4">
@@ -123,7 +52,20 @@ const JoinGameWizard = ({
       {!isLoading && !isInRoom && (
         <button
           className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => attemptJoinParty()}
+          onClick={() =>
+            attemptJoinParty(
+              baseUrl,
+              socket,
+              username,
+              roomCode,
+              setErrorMessage,
+              setHasError,
+              setIsLoading,
+              setIsInRoom,
+              setPlayers,
+              setIsGameStarted
+            )
+          }
           disabled={isLoading}
         >
           Join game
@@ -133,7 +75,7 @@ const JoinGameWizard = ({
       {isInRoom && !isReady && (
         <button
           className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => reportReady()}
+          onClick={() => reportReady(socket, setIsReady)}
           disabled={isReady}
         >
           Ready up!
