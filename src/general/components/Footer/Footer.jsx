@@ -1,10 +1,11 @@
 import React from "react";
+import FeatherIcon from "feather-icons-react";
 
 const Footer = () => {
   return (
     <footer className="py-5 bg-black text-center text-white flex flex-row justify-between">
-      <div>
-        <p className="ml-8 mr-8">
+      <div className="ml-8 mr-8">
+        <p>
           Learn the{" "}
           <a
             href="https://www.prometheusconcept.com/schedule"
@@ -14,8 +15,19 @@ const Footer = () => {
           </a>
         </p>
       </div>
-      <div>
-        <p className="ml-8 mr-8">Some other content</p>
+      <div className="ml-8 mr-8">
+          <a
+              className="m-auto"
+              href="https://github.com/sjwarner/prometheus-concept"
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+              <FeatherIcon
+                  icon="github"
+                  className="mr-4"
+                  alt="Prometheus Concept GitHub repository"
+              />
+          </a>
       </div>
     </footer>
   );
