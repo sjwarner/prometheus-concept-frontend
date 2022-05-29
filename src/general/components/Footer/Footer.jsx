@@ -16,18 +16,18 @@ const Footer = () => {
         </p>
       </div>
       <div className="ml-8 mr-8">
-          <a
-              className="m-auto"
-              href="https://github.com/sjwarner/prometheus-concept"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-              <FeatherIcon
-                  icon="github"
-                  className="mr-4"
-                  alt="Prometheus Concept GitHub repository"
-              />
-          </a>
+        <a
+          className="m-auto"
+          href="https://github.com/sjwarner/prometheus-concept"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FeatherIcon
+            icon="github"
+            className="mr-4"
+            alt="Prometheus Concept GitHub repository"
+          />
+        </a>
       </div>
     </footer>
   );

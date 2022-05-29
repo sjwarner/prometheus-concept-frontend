@@ -4,6 +4,7 @@ import Pieces from "../../logic/Pieces";
 import Tetrahedron from "../Pieces/Tetrahedron";
 import Pyramid from "../Pieces/Pyramid";
 import Cube from "../Pieces/Cube";
+import Empty from "../Pieces/Empty";
 
 const renderPiece = (piece) => {
   switch (piece) {
@@ -24,7 +25,7 @@ const renderPiece = (piece) => {
     case Pieces.BLACK_CUBE:
       return <Cube colour="black" />;
     default:
-      return piece;
+      return <Empty />;
   }
 };
 
