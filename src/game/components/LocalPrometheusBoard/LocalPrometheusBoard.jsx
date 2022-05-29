@@ -67,10 +67,10 @@ const LocalPrometheusBoard = ({
   const selectCandidatePiece = (rank, file) => {
     let candidatePiece = gameState[rank][file];
     if (
-      (turn === Players.PLAYER_ONE &&
+      (turn === Players.WHITE &&
         candidatePiece &&
         candidatePiece === candidatePiece.toUpperCase()) ||
-      (turn === Players.PLAYER_TWO &&
+      (turn === Players.BLACK &&
         candidatePiece &&
         candidatePiece === candidatePiece.toLowerCase())
     ) {
@@ -99,10 +99,10 @@ const LocalPrometheusBoard = ({
         setWinner(turn);
         setInProgress(false);
       }
-      if (playerOneFirstTurn && turn === Players.PLAYER_ONE) {
+      if (playerOneFirstTurn && turn === Players.WHITE) {
         setPlayerOneFirstTurn(false);
       }
-      if (playerTwoFirstTurn && turn === Players.PLAYER_TWO) {
+      if (playerTwoFirstTurn && turn === Players.BLACK) {
         setPlayerTwoFirstTurn(false);
       }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
@@ -111,9 +111,7 @@ const LocalPrometheusBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
-      setTurn(
-        turn === Players.PLAYER_ONE ? Players.PLAYER_TWO : Players.PLAYER_ONE
-      );
+      setTurn(turn === Players.WHITE ? Players.BLACK : Players.WHITE);
     }
   };
 

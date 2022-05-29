@@ -31,8 +31,7 @@ const LocalBoardCaption = ({
     <div className="below-board-container mt-4">
       {winner && (
         <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          🎉 {winner === Players.PLAYER_ONE ? "Player One" : "Player Two"} won!
-          🎉
+          🎉 {winner === Players.WHITE ? "Player One" : "Player Two"} won! 🎉
         </span>
       )}
       {inProgress && !playerOneSpherePlaced && (
@@ -47,7 +46,7 @@ const LocalBoardCaption = ({
       )}
       {inProgressWithSpheresPlaced && (
         <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          {turn === Players.PLAYER_ONE ? "White" : "Black"}'s turn.
+          {turn === Players.WHITE ? "White" : "Black"}'s turn.
         </span>
       )}
       {!inProgress && (

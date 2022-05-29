@@ -1,6 +1,6 @@
 const Players = {
-  PLAYER_ONE: "player_one",
-  PLAYER_TWO: "player_two",
+  WHITE: "white",
+  BLACK: "black",
 };
 
 export default Players;

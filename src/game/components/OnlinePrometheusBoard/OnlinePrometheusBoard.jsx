@@ -25,7 +25,7 @@ const OnlinePrometheusBoard = ({
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
   const [povInitialGameState, setPovInitialGameState] = useState(
-    playerNumber === Players.PLAYER_ONE
+    playerNumber === Players.WHITE
       ? InitialGameStateWhite
       : InitialGameStateBlack
   );
@@ -86,7 +86,7 @@ const OnlinePrometheusBoard = ({
     setHasOpponentRequestedRematch(false);
 
     const isStartingPlayer = players[startingPlayer].name === username;
-    setPlayerNumber(isStartingPlayer ? Players.PLAYER_ONE : Players.PLAYER_TWO);
+    setPlayerNumber(isStartingPlayer ? Players.WHITE : Players.BLACK);
     setPovInitialGameState(
       isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
     );
@@ -100,14 +100,14 @@ const OnlinePrometheusBoard = ({
 
     // Use correct function for either white or black
     const selectedSquareCaseTransformed =
-      playerNumber === Players.PLAYER_ONE
+      playerNumber === Players.WHITE
         ? selectedSquare.toUpperCase()
         : selectedSquare.toLowerCase();
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
       let tmp = gameState;
       tmp[rank][file] =
-        playerNumber === Players.PLAYER_ONE
+        playerNumber === Players.WHITE
           ? Pieces.WHITE_SPHERE
           : Pieces.BLACK_SPHERE;
       setGameState(tmp);
@@ -123,10 +123,10 @@ const OnlinePrometheusBoard = ({
   const selectCandidatePiece = (rank, file) => {
     let candidatePiece = gameState[rank][file];
     if (
-      (playerNumber === Players.PLAYER_ONE &&
+      (playerNumber === Players.WHITE &&
         candidatePiece &&
         candidatePiece === candidatePiece.toUpperCase()) ||
-      (playerNumber === Players.PLAYER_TWO &&
+      (playerNumber === Players.BLACK &&
         candidatePiece &&
         candidatePiece === candidatePiece.toLowerCase())
     ) {

@@ -42,8 +42,8 @@ const JoinGamePage = () => {
           isGameStarted={isGameStarted}
           initialPlayerNumber={
             players.findIndex((player) => player.name === username) === 0
-              ? Players.PLAYER_ONE
-              : Players.PLAYER_TWO
+              ? Players.WHITE
+              : Players.BLACK
           }
           players={players}
           username={username}
