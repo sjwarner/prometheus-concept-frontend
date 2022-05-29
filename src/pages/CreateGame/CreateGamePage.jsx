@@ -136,13 +136,13 @@ const CreateGamePage = () => {
 
           {roomCode && (
             <div>
+              {/* TODO: Make this easily copy/sendable */}
               <p>
                 ROOM CODE: <br></br> <br></br>
                 <b className="" onClick={() => {}}>
                   {roomCode}
                 </b>
               </p>
-              {/*{this.state.copied ? <p>Copied to clipboard</p> : null}*/}
             </div>
           )}
 
