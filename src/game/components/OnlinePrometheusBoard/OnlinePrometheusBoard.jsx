@@ -10,11 +10,13 @@ import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 const OnlinePrometheusBoard = ({
   socket,
   isGameStarted,
-  playerNumber,
+  initialPlayerNumber,
+  players,
   username,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [isPlayerTurn, setIsPlayerTurn] = useState(null);
+  const [playerNumber, setPlayerNumber] = useState(initialPlayerNumber)
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
@@ -68,8 +70,14 @@ const OnlinePrometheusBoard = ({
     setHasOpponentRequestedRematch(true);
   });
 
-  socket.on("resetGame", () => {
+  socket.on("resetGame", (startingPlayer) => {
+    setHasOpponentRequestedRematch(false);
+
     resetGame();
+
+    const isStartingPlayer = players[startingPlayer].name === username
+    setPlayerNumber(isStartingPlayer ? Players.PLAYER_ONE : Players.PLAYER_TWO);
+    setIsPlayerTurn(isStartingPlayer);
   });
 
   const addSphere = (rank, file) => {

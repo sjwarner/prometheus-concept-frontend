@@ -162,11 +162,12 @@ const CreateGamePage = () => {
         <OnlinePrometheusBoard
           socket={socket}
           isGameStarted={isGameStarted}
-          playerNumber={
+          initialPlayerNumber={
             players.findIndex((player) => player.name === username) === 0
               ? Players.PLAYER_ONE
               : Players.PLAYER_TWO
           }
+          players={players}
           username={username}
         />
       )}
