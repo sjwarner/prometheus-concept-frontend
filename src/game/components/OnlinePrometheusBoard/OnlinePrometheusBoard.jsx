@@ -200,7 +200,7 @@ const OnlinePrometheusBoard = ({
   };
 
   return (
-    <div className="board">
+    <div className="board flex flex-row">
       <div className="content">
         {Array(8)
           .fill(1)
