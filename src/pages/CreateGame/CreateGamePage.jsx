@@ -87,7 +87,7 @@ const CreateGamePage = () => {
   }, [socket, joinParty]);
 
   return (
-    <div className="app p-8 flex flex-col justify-center items-center h-screen">
+    <div className="app p-8 flex flex-col justify-center items-center">
       {!isGameStarted && (
         <CreateGameWizard
           baseUrl={baseUrl}

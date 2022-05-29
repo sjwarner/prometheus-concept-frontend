@@ -5,7 +5,7 @@ import Tetrahedron from "../../game/components/Pieces/Tetrahedron";
 
 const Homepage = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center">
       <h1 className="text-xl font-bold">Welcome to Prometheus Concept!</h1>
       <p>A chess-like game, with fewer rules and more possibilities</p>
       <div className="w-32">

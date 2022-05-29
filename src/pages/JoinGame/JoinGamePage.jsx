@@ -26,7 +26,7 @@ const JoinGamePage = () => {
   }, [baseUrl, roomCode]);
 
   return (
-    <div className="app p-8 flex flex-col justify-center items-center h-screen">
+    <div className="app p-8 flex flex-col justify-center items-center">
       {!isGameStarted && (
         <JoinGameWizard
           baseUrl={baseUrl}
