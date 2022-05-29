@@ -5,7 +5,7 @@ import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/O
 import CreateGameWizard from "./components/CreateGameWizard/CreateGameWizard";
 
 import Players from "../../game/logic/Players";
-import {Link} from "react-router-dom";
+import Modal from "../../general/components/Modal/Modal";
 
 const CreateGamePage = () => {
   const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -110,35 +110,13 @@ const CreateGamePage = () => {
           username={username}
         />
       )}
-      {isDisconnected && (
-        <div className="fixed w-full h-screen bg-gray-900 bg-opacity-50">
-          <div className="modal-dialog relative w-auto m-4 pointer-events-none">
-            <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-              <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md bg-red-200">
-                <h5
-                  className="text-xl font-medium leading-normal text-gray-800"
-                  id="exampleModalLabel"
-                >
-                  Error
-                </h5>
-              </div>
-              <div className="modal-body relative p-4">
-                Disconnected from server.
-                <br />
-                Game will be terminated.
-                <br />
-              </div>
-              <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-around p-4 border-t border-gray-200 rounded-b-md">
-                <Link
-                    className="block bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                    to="/"
-                >
-                  Home
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+      {!isDisconnected && (
+        <Modal type="Error">
+          Disconnected from server.
+          <br />
+          Game will be terminated.
+          <br />
+        </Modal>
       )}
     </div>
   );
