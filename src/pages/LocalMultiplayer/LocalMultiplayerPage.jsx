@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 
-import PrometheusBoard from "../../game/components/PrometheusBoard/PrometheusBoard";
+import LocalPrometheusBoard from "../../game/components/LocalPrometheusBoard/LocalPrometheusBoard";
 import Players from "../../game/logic/Players";
 import { InitialGameStateWhite } from "../../game/logic/InitialGameState";
 
@@ -18,7 +18,7 @@ const LocalMultiplayerPage = () => {
 
   return (
     <div className="app p-8 flex flex-col justify-center items-center h-screen">
-      <PrometheusBoard
+      <LocalPrometheusBoard
         inProgress={inProgress}
         setInProgress={setInProgress}
         playerOneSpherePlaced={playerOneSpherePlaced}

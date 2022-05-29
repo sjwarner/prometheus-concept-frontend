@@ -5,7 +5,7 @@ import Players from "../../logic/Players";
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
 
-const PrometheusBoard = ({
+const LocalPrometheusBoard = ({
   inProgress,
   setInProgress,
   playerOneSpherePlaced,
@@ -161,4 +161,4 @@ const PrometheusBoard = ({
   );
 };
 
-export default PrometheusBoard;
+export default LocalPrometheusBoard;
