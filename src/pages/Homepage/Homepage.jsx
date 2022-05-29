@@ -8,7 +8,7 @@ const Homepage = () => {
     <div className="flex flex-col justify-center items-center text-center">
       <h1 className="text-xl font-bold">Welcome to Prometheus Concept!</h1>
       <p>A chess-like game, with fewer rules and more possibilities</p>
-      <div className="w-32">
+      <div className="w-32 mt-4">
         <Tetrahedron />
       </div>
       <Link
