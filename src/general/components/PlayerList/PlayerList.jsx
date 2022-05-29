@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactSortable } from "react-sortablejs";
+import FeatherIcon from "feather-icons-react";
 
 const PlayerList = ({ players, setPlayers }) => {
   return (
@@ -24,9 +25,15 @@ const PlayerList = ({ players, setPlayers }) => {
               key={index}
             >
               <div className="flex justify-between p-2">
-                <p>
-                  {index === 0 ? "White" : "Black"}: {player.name}
-                </p>
+                <div className="flex">
+                  <FeatherIcon
+                    icon="shuffle"
+                    alt="Drag and drop player order"
+                  />
+                  <p className="ml-1">
+                    {index === 0 ? "White" : "Black"}: {player.name}
+                  </p>
+                </div>
                 <p>{ready}</p>
               </div>
             </div>
