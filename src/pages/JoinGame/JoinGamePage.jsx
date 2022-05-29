@@ -15,7 +15,7 @@ const JoinGamePage = () => {
   const [players, setPlayers] = useState(null);
 
   const [isDisconnected, setIsDisconnected] = useState(false);
-  const [disconnectedMessage, setDisconnectedMessage] = useState('');
+  const [disconnectedMessage, setDisconnectedMessage] = useState("");
 
   useEffect(() => {
     const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
