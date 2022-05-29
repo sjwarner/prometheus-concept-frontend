@@ -58,9 +58,7 @@ const CreateGamePage = () => {
       setIsLoading(false);
     });
 
-    socket.on("leader", function () {
-      console.log("You are the leader");
-    });
+    socket.on("leader", function () {});
 
     socket.on("partyUpdate", (players) => {
       setPlayers(players);
