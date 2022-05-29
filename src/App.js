@@ -6,6 +6,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import LocalMultiplayerPage from "./pages/LocalMultiplayer/LocalMultiplayerPage";
 import CreateGamePage from "./pages/CreateGame/CreateGamePage";
 import JoinGamePage from "./pages/JoinGame/JoinGamePage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               element={<LocalMultiplayerPage />}
             />
             <Route path="/" element={<Homepage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </Router>
