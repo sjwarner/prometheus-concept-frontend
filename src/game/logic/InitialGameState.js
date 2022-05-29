@@ -1,6 +1,6 @@
 import Pieces from "./Pieces";
 
-const InitialGameState = [
+export const InitialGameStateWhite = [
   [
     Pieces.BLACK_CUBE,
     Pieces.BLACK_CUBE,
@@ -65,4 +65,67 @@ const InitialGameState = [
   ],
 ];
 
-export default InitialGameState;
+export const InitialGameStateBlack = [
+  [
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+    Pieces.WHITE_CUBE,
+  ],
+  [
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+    Pieces.WHITE_PYRAMID,
+  ],
+  [
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+    Pieces.WHITE_TETRAHEDRON,
+  ],
+  ["", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", ""],
+  [
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+    Pieces.BLACK_TETRAHEDRON,
+  ],
+  [
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+    Pieces.BLACK_PYRAMID,
+  ],
+  [
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+    Pieces.BLACK_CUBE,
+  ]
+];

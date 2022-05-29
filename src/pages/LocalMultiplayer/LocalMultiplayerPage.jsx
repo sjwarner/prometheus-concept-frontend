@@ -3,7 +3,7 @@ import "../../App.css";
 
 import PrometheusBoard from "../../game/components/PrometheusBoard/PrometheusBoard";
 import Players from "../../game/logic/Players";
-import InitialGameState from "../../game/logic/InitialGameState";
+import { InitialGameStateWhite } from "../../game/logic/InitialGameState";
 
 const LocalMultiplayerPage = () => {
   const [inProgress, setInProgress] = useState(false);
@@ -11,7 +11,7 @@ const LocalMultiplayerPage = () => {
   const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
   // Stringify hack to deep clone InitialGameState - avoids mutation.
   const [gameState, setGameState] = useState(
-    JSON.parse(JSON.stringify(InitialGameState))
+    JSON.parse(JSON.stringify(InitialGameStateWhite))
   );
   const [winner, setWinner] = useState(null);
   const [turn, setTurn] = useState(Players.PLAYER_ONE);
@@ -22,7 +22,7 @@ const LocalMultiplayerPage = () => {
   const resetGame = () => {
     setInProgress(true);
     setWinner(null);
-    setGameState(JSON.parse(JSON.stringify(InitialGameState)));
+    setGameState(JSON.parse(JSON.stringify(InitialGameStateWhite)));
     setPlayerOneSpherePlaced(false);
     setPlayerTwoSpherePlaced(false);
   };

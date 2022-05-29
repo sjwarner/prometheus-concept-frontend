@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
 
-import InitialGameState from "../../logic/InitialGameState";
+import { InitialGameStateWhite, InitialGameStateBlack } from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
@@ -21,18 +21,20 @@ const OnlinePrometheusBoard = ({
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
-  // Stringify hack to deep clone InitialGameState - avoids mutation.
+  const [povInitialGameState, setPovInitialGameState] = useState(playerNumber === Players.PLAYER_ONE ? InitialGameStateWhite : InitialGameStateBlack)
+
   const [gameState, setGameState] = useState(
-    JSON.parse(JSON.stringify(InitialGameState))
+    // Stringify hack to deep clone InitialGameState - avoids mutation.
+    JSON.parse(JSON.stringify(povInitialGameState))
   );
   const [winner, setWinner] = useState(null);
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
     useState(false);
 
-  const resetGame = () => {
+  const resetGame = (isStartingPlayer) => {
     setInProgress(true);
     setWinner(null);
-    setGameState(JSON.parse(JSON.stringify(InitialGameState)));
+    setGameState(isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack);
     setIsSpherePlaced(false);
   };
 
@@ -74,11 +76,12 @@ const OnlinePrometheusBoard = ({
   socket.on("resetGame", (startingPlayer) => {
     setHasOpponentRequestedRematch(false);
 
-    resetGame();
-
     const isStartingPlayer = players[startingPlayer].name === username;
     setPlayerNumber(isStartingPlayer ? Players.PLAYER_ONE : Players.PLAYER_TWO);
+    setPovInitialGameState(isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack);
     setIsPlayerTurn(isStartingPlayer);
+
+    resetGame(isStartingPlayer);
   });
 
   const addSphere = (rank, file) => {
@@ -99,7 +102,10 @@ const OnlinePrometheusBoard = ({
       setGameState(tmp);
       setIsSpherePlaced(true);
 
-      socket.emit("playerMovedPiece", gameState);
+      let reversedGameState = JSON.parse(JSON.stringify(gameState));
+      reversedGameState.map(row=>row.reverse());
+      reversedGameState.reverse()
+      socket.emit("playerMovedPiece", reversedGameState);
     }
   };
 
@@ -143,11 +149,17 @@ const OnlinePrometheusBoard = ({
       setValidMoves([]);
 
       if (winningMove) {
-        socket.emit("playerWon", gameState);
+        let reversedGameState = JSON.parse(JSON.stringify(gameState));
+        reversedGameState.map(row=>row.reverse());
+        reversedGameState.reverse()
+
+        socket.emit("playerWon", reversedGameState);
       } else {
-        console.log('Moved piece')
-        console.log(socket)
-        socket.emit("playerMovedPiece", gameState);
+        let reversedGameState = JSON.parse(JSON.stringify(gameState));
+        reversedGameState.map(row=>row.reverse());
+        reversedGameState.reverse()
+
+        socket.emit("playerMovedPiece", reversedGameState);
       }
     }
   };
