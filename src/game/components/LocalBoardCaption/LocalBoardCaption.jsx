@@ -25,8 +25,6 @@ const LocalBoardCaption = ({
   const inProgressWithSpheresPlaced =
     inProgress && playerOneSpherePlaced && playerTwoSpherePlaced;
 
-  console.log(inProgress);
-
   return (
     <div className="below-board-container mt-4">
       {winner && (
