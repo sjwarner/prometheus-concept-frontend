@@ -20,6 +20,7 @@ const CreateGamePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isDisconnected, setIsDisconnected] = useState(false);
+  const [disconnectedMessage, setDisconnectedMessage] = useState("");
 
   const joinParty = useCallback(() => {
     socket.emit("setName", username);
@@ -58,7 +59,14 @@ const CreateGamePage = () => {
     socket.on("disconnect", () => {
       console.log("You've lost connection with the server");
       setIsDisconnected(true);
+      setDisconnectedMessage("Disconnected from server.");
       socket.close();
+    });
+
+    socket.on("playerDisconnected", (disconnectedReason) => {
+      console.log("Opponent left game");
+      setIsDisconnected(true);
+      setDisconnectedMessage(disconnectedReason);
     });
   }, [socket, username]);
 
@@ -110,9 +118,9 @@ const CreateGamePage = () => {
           username={username}
         />
       )}
-      {!isDisconnected && (
+      {isDisconnected && (
         <Modal type="Error">
-          Disconnected from server.
+          {disconnectedMessage}
           <br />
           Game will be terminated.
           <br />

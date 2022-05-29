@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import Players from "../../game/logic/Players";
 import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/OnlinePrometheusBoard";
 import JoinGameWizard from "./components/JoinGameWizard/JoinGameWizard";
+import Modal from "../../general/components/Modal/Modal";
 
 const JoinGamePage = () => {
   const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -12,6 +13,9 @@ const JoinGamePage = () => {
   const [roomCode, setRoomCode] = useState(null);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [players, setPlayers] = useState(null);
+
+  const [isDisconnected, setIsDisconnected] = useState(false);
+  const [disconnectedMessage, setDisconnectedMessage] = useState('');
 
   useEffect(() => {
     const newSocket = io.connect(`${baseUrl}/${roomCode}`, {
@@ -35,7 +39,6 @@ const JoinGamePage = () => {
           setIsGameStarted={setIsGameStarted}
         />
       )}
-
       {isGameStarted && (
         <OnlinePrometheusBoard
           socket={socket}
@@ -47,7 +50,17 @@ const JoinGamePage = () => {
           }
           players={players}
           username={username}
+          setIsDisconnected={setIsDisconnected}
+          setDisconnectedMessage={setDisconnectedMessage}
         />
+      )}
+      {isDisconnected && (
+        <Modal type="Error">
+          {disconnectedMessage}
+          <br />
+          Game will be terminated.
+          <br />
+        </Modal>
       )}
     </div>
   );

@@ -17,6 +17,8 @@ const OnlinePrometheusBoard = ({
   initialPlayerNumber,
   players,
   username,
+  setIsDisconnected,
+  setDisconnectedMessage
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [isPlayerTurn, setIsPlayerTurn] = useState(null);
@@ -93,6 +95,24 @@ const OnlinePrometheusBoard = ({
     setIsPlayerTurn(isStartingPlayer);
 
     resetGame(isStartingPlayer);
+  });
+
+  socket.on("connect", () => {
+    console.log("You've connected to the server");
+    setIsDisconnected(false);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("You've lost connection with the server");
+    setIsDisconnected(true);
+    setDisconnectedMessage("Disconnected from server.");
+    socket.close();
+  });
+
+  socket.on("playerDisconnected", (disconnectedReason) => {
+    console.log("Opponent left game");
+    setIsDisconnected(true);
+    setDisconnectedMessage(disconnectedReason);
   });
 
   const addSphere = (rank, file) => {
