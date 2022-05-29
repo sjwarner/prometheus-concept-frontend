@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PlayerList from "../../../../general/components/PlayerList/PlayerList";
 import { createParty, startGame } from "../../utils/createGameUtils";
+import FeatherIcon from "feather-icons-react";
 
 const CreateGameWizard = ({
   baseUrl,
@@ -56,14 +57,19 @@ const CreateGameWizard = ({
       )}
 
       {roomCode && (
-        <div className="m-4">
-          {/* TODO: Make this easily copy/sendable */}
-          <p>
-            Room Code:{" "}
-            <b className="" onClick={() => {}}>
-              {roomCode}
-            </b>
-          </p>
+        <div className="flex justify-between m-4 ">
+          <p className="m-auto">Room Code:&nbsp;</p>
+          <div className="flex">
+            <b className="m-auto">{roomCode}&nbsp;</b>
+            <button
+              className="block m-auto bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border border-gray-400 rounded shadow"
+              onClick={() => {
+                navigator.clipboard.writeText(roomCode);
+              }}
+            >
+              <FeatherIcon icon="clipboard" alt="Copy room code" />
+            </button>
+          </div>
         </div>
       )}
 
