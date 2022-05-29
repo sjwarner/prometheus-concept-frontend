@@ -17,7 +17,7 @@ const OnlinePrometheusBoard = ({
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [isPlayerTurn, setIsPlayerTurn] = useState(null);
-  const [playerNumber, setPlayerNumber] = useState(initialPlayerNumber)
+  const [playerNumber, setPlayerNumber] = useState(initialPlayerNumber);
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
@@ -76,7 +76,7 @@ const OnlinePrometheusBoard = ({
 
     resetGame();
 
-    const isStartingPlayer = players[startingPlayer].name === username
+    const isStartingPlayer = players[startingPlayer].name === username;
     setPlayerNumber(isStartingPlayer ? Players.PLAYER_ONE : Players.PLAYER_TWO);
     setIsPlayerTurn(isStartingPlayer);
   });
@@ -152,7 +152,7 @@ const OnlinePrometheusBoard = ({
 
   const requestRematch = () => {
     socket.emit("requestRematch", username);
-  }
+  };
 
   return (
     <div className="board">
@@ -181,9 +181,14 @@ const OnlinePrometheusBoard = ({
               </div>
             );
           })}
-        <OnlineBoardCaption inProgress={inProgress} isPlayerTurn={isPlayerTurn} isSpherePlaced={isSpherePlaced}
-                            winner={winner} hasOpponentRequestedRematch={hasOpponentRequestedRematch}
-                            requestRematch={requestRematch}/>
+        <OnlineBoardCaption
+          inProgress={inProgress}
+          isPlayerTurn={isPlayerTurn}
+          isSpherePlaced={isSpherePlaced}
+          winner={winner}
+          hasOpponentRequestedRematch={hasOpponentRequestedRematch}
+          requestRematch={requestRematch}
+        />
       </div>
     </div>
   );
