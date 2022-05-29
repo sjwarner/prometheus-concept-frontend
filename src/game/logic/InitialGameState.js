@@ -127,5 +127,5 @@ export const InitialGameStateBlack = [
     Pieces.BLACK_CUBE,
     Pieces.BLACK_CUBE,
     Pieces.BLACK_CUBE,
-  ]
+  ],
 ];
