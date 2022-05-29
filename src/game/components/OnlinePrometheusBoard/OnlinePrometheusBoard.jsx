@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
 
-import { InitialGameStateWhite, InitialGameStateBlack } from "../../logic/InitialGameState";
+import {
+  InitialGameStateWhite,
+  InitialGameStateBlack,
+} from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
@@ -21,7 +24,11 @@ const OnlinePrometheusBoard = ({
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
-  const [povInitialGameState, setPovInitialGameState] = useState(playerNumber === Players.PLAYER_ONE ? InitialGameStateWhite : InitialGameStateBlack)
+  const [povInitialGameState, setPovInitialGameState] = useState(
+    playerNumber === Players.PLAYER_ONE
+      ? InitialGameStateWhite
+      : InitialGameStateBlack
+  );
 
   const [gameState, setGameState] = useState(
     // Stringify hack to deep clone InitialGameState - avoids mutation.
@@ -34,7 +41,9 @@ const OnlinePrometheusBoard = ({
   const resetGame = (isStartingPlayer) => {
     setInProgress(true);
     setWinner(null);
-    setGameState(isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack);
+    setGameState(
+      isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
+    );
     setIsSpherePlaced(false);
   };
 
@@ -78,7 +87,9 @@ const OnlinePrometheusBoard = ({
 
     const isStartingPlayer = players[startingPlayer].name === username;
     setPlayerNumber(isStartingPlayer ? Players.PLAYER_ONE : Players.PLAYER_TWO);
-    setPovInitialGameState(isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack);
+    setPovInitialGameState(
+      isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
+    );
     setIsPlayerTurn(isStartingPlayer);
 
     resetGame(isStartingPlayer);
@@ -103,8 +114,8 @@ const OnlinePrometheusBoard = ({
       setIsSpherePlaced(true);
 
       let reversedGameState = JSON.parse(JSON.stringify(gameState));
-      reversedGameState.map(row=>row.reverse());
-      reversedGameState.reverse()
+      reversedGameState.map((row) => row.reverse());
+      reversedGameState.reverse();
       socket.emit("playerMovedPiece", reversedGameState);
     }
   };
@@ -150,14 +161,14 @@ const OnlinePrometheusBoard = ({
 
       if (winningMove) {
         let reversedGameState = JSON.parse(JSON.stringify(gameState));
-        reversedGameState.map(row=>row.reverse());
-        reversedGameState.reverse()
+        reversedGameState.map((row) => row.reverse());
+        reversedGameState.reverse();
 
         socket.emit("playerWon", reversedGameState);
       } else {
         let reversedGameState = JSON.parse(JSON.stringify(gameState));
-        reversedGameState.map(row=>row.reverse());
-        reversedGameState.reverse()
+        reversedGameState.map((row) => row.reverse());
+        reversedGameState.reverse();
 
         socket.emit("playerMovedPiece", reversedGameState);
       }
