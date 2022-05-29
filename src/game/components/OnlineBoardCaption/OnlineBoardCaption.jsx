@@ -9,7 +9,7 @@ const OnlineBoardCaption = ({
   requestRematch,
 }) => {
   return (
-    <div className="below-board-container mt-4">
+    <div className="mt-4">
       {inProgress && isPlayerTurn && !isSpherePlaced && (
         <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
           Place your sphere.
