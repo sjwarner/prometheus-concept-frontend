@@ -46,26 +46,24 @@ const LocalPrometheusBoard = ({
     // Sphere has to replace one of Player One's pieces.
     let selectedSquare = gameState[rank][file];
     let whitePlayer = player === Players.WHITE;
+    let tmp = gameState;
 
     if (
-      (selectedSquare &&
-        selectedSquare === selectedSquare.toUpperCase() &&
-        whitePlayer) ||
-      (selectedSquare &&
-        selectedSquare === selectedSquare.toLowerCase() &&
-        !whitePlayer)
+      selectedSquare &&
+      selectedSquare === selectedSquare.toUpperCase() &&
+      whitePlayer
     ) {
-      let tmp = gameState;
-
-      if (player === Players.WHITE) {
-        tmp[rank][file] = Pieces.WHITE_SPHERE;
-        setGameState(tmp);
-        setPlayerOneSpherePlaced(true);
-      } else {
-        tmp[rank][file] = Pieces.BLACK_SPHERE;
-        setGameState(tmp);
-        setPlayerTwoSpherePlaced(true);
-      }
+      tmp[rank][file] = Pieces.WHITE_SPHERE;
+      setGameState(tmp);
+      setPlayerOneSpherePlaced(true);
+    } else if (
+      selectedSquare &&
+      selectedSquare === selectedSquare.toLowerCase() &&
+      !whitePlayer
+    ) {
+      tmp[rank][file] = Pieces.BLACK_SPHERE;
+      setGameState(tmp);
+      setPlayerTwoSpherePlaced(true);
     }
   };
 
