@@ -23,9 +23,14 @@ const PlayerList = ({ players, setPlayers }) => {
               style={{ backgroundColor: readyUnitColor }}
               key={index}
             >
-              <p>
-                {index === 0 ? "White" : "Black"}: {player.name} {ready}
-              </p>
+              <div className="flex justify-between p-2">
+                  <p>
+                      {index === 0 ? "White" : "Black"}: {player.name}
+                  </p>
+                  <p>
+                      {ready}
+                  </p>
+              </div>
             </div>
           );
         })}
