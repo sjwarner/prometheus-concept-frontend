@@ -56,10 +56,10 @@ const CreateGameWizard = ({
       )}
 
       {roomCode && (
-        <div>
+        <div className="m-4">
           {/* TODO: Make this easily copy/sendable */}
           <p>
-            ROOM CODE: <br></br> <br></br>
+            ROOM CODE:{" "}
             <b className="" onClick={() => {}}>
               {roomCode}
             </b>
