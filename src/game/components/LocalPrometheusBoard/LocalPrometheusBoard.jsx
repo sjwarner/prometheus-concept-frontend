@@ -32,9 +32,9 @@ const LocalPrometheusBoard = ({
 
   const makeMove = (rank, file) => {
     !playerOneSpherePlaced
-      ? addPlayerOneSphere(rank, file)
+      ? addPlayerSphere(Players.WHITE, rank, file)
       : !playerTwoSpherePlaced
-      ? addPlayerTwoSphere(rank, file)
+      ? addPlayerSphere(Players.BLACK, rank, file)
       : originRank === null && originFile === null
       ? selectCandidatePiece(rank, file)
       : originRank === rank && originFile === file
@@ -42,25 +42,30 @@ const LocalPrometheusBoard = ({
       : movePiece(rank, file);
   };
 
-  const addPlayerOneSphere = (rank, file) => {
+  const addPlayerSphere = (player, rank, file) => {
     // Sphere has to replace one of Player One's pieces.
     let selectedSquare = gameState[rank][file];
-    if (selectedSquare && selectedSquare === selectedSquare.toUpperCase()) {
-      let tmp = gameState;
-      tmp[rank][file] = Pieces.WHITE_SPHERE;
-      setGameState(tmp);
-      setPlayerOneSpherePlaced(true);
-    }
-  };
+    let whitePlayer = player === Players.WHITE;
 
-  const addPlayerTwoSphere = (rank, file) => {
-    // Sphere has to replace one of Player Two's pieces.
-    let selectedSquare = gameState[rank][file];
-    if (selectedSquare && selectedSquare === selectedSquare.toLowerCase()) {
+    if (
+      (selectedSquare &&
+        selectedSquare === selectedSquare.toUpperCase() &&
+        whitePlayer) ||
+      (selectedSquare &&
+        selectedSquare === selectedSquare.toLowerCase() &&
+        !whitePlayer)
+    ) {
       let tmp = gameState;
-      tmp[rank][file] = Pieces.BLACK_SPHERE;
-      setGameState(tmp);
-      setPlayerTwoSpherePlaced(true);
+
+      if (player === Players.WHITE) {
+        tmp[rank][file] = Pieces.WHITE_SPHERE;
+        setGameState(tmp);
+        setPlayerOneSpherePlaced(true);
+      } else {
+        tmp[rank][file] = Pieces.BLACK_SPHERE;
+        setGameState(tmp);
+        setPlayerTwoSpherePlaced(true);
+      }
     }
   };
 
