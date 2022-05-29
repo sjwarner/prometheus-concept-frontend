@@ -1,5 +1,5 @@
 {
-  "name": "prometheus-concept",
+  "name": "prometheus-concept-client",
   "homepage": "https://prometheus-concept.sjwarner.me",
   "version": "0.1.0",
   "private": true,
