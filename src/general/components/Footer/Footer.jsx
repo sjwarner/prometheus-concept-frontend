@@ -24,7 +24,6 @@ const Footer = () => {
         >
           <FeatherIcon
             icon="github"
-            className="mr-4"
             alt="Prometheus Concept GitHub repository"
           />
         </a>
