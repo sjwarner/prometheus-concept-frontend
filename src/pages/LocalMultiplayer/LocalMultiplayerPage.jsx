@@ -10,7 +10,6 @@ const LocalMultiplayerPage = () => {
   const [playerOneSpherePlaced, setPlayerOneSpherePlaced] = useState(false);
   const [playerTwoSpherePlaced, setPlayerTwoSpherePlaced] = useState(false);
   // Stringify hack to deep clone InitialGameState - avoids mutation.
-  // TODO: Use lodash here instead?
   const [gameState, setGameState] = useState(
     JSON.parse(JSON.stringify(InitialGameState))
   );
