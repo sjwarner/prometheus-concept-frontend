@@ -11,8 +11,7 @@
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
     "lint": "npx prettier --check .",
-    "lint:fix": "npx prettier --write .",
-    "prepare": "husky install"
+    "lint:fix": "npx prettier --write ."
   },
   "dependencies": {
     "@craco/craco": "^6.4.3",
