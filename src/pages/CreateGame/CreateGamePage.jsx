@@ -76,8 +76,9 @@ const CreateGamePage = () => {
       }
     });
 
-    socket.on("disconnected", function () {
+    socket.on("disconnect", function () {
       console.log("You've lost connection with the server");
+      socket.close();
     });
   }, [socket, username]);
 
