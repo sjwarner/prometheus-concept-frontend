@@ -2,12 +2,19 @@ import React from "react";
 import { ReactSortable } from "react-sortablejs";
 import FeatherIcon from "feather-icons-react";
 
-const PlayerList = ({ players, setPlayers }) => {
+const PlayerList = ({ socket, players, setPlayers }) => {
+  const handleListUpdate = (newPlayerOrder) => {
+    setPlayers(newPlayerOrder);
+    socket.emit("playerOrderUpdated", newPlayerOrder);
+  };
+
   return (
     <div className="readyUnitContainer">
       <ReactSortable
         list={players}
-        setList={(newPlayerOrder) => setPlayers(newPlayerOrder)}
+        setList={(newPlayerOrder) => {
+          handleListUpdate(newPlayerOrder);
+        }}
       >
         {players.map((player, index) => {
           let ready;

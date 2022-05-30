@@ -90,6 +90,10 @@ const joinParty = (
     setPlayers(players);
   });
 
+  socket.on("updateClientPlayerOrder", (players) => {
+    setPlayers(players);
+  });
+
   socket.on("startGame", () => {
     setIsGameStarted(true);
   });
