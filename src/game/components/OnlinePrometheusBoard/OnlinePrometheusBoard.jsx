@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
+import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
 
 import {
   InitialGameStateWhite,
@@ -9,7 +10,6 @@ import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
-import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -199,7 +199,6 @@ const OnlinePrometheusBoard = ({
 
   const requestRematch = () => {
     setHasRequestedRematch(true);
-    console.log("bang");
     socket.emit("requestRematch", username);
   };
 
