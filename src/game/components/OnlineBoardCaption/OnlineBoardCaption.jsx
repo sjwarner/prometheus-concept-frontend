@@ -9,7 +9,6 @@ const OnlineBoardCaption = ({
   hasOpponentRequestedRematch,
   requestRematch,
 }) => {
-  console.log(hasRequestedRematch);
   return (
     <div className="mt-4">
       {inProgress && isPlayerTurn && !isSpherePlaced && (
