@@ -28,7 +28,7 @@ const JoinGameWizard = ({
           Username
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-50"
           id="username"
           type="text"
           placeholder="Username"
@@ -44,7 +44,7 @@ const JoinGameWizard = ({
           Room Code
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-50"
           id="roomCode"
           type="text"
           placeholder="Room Code"
@@ -55,7 +55,7 @@ const JoinGameWizard = ({
       {hasError && <div className="mt-4">{errorMessage}</div>}
       {!isLoading && !isInRoom && (
         <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() =>
             attemptJoinParty(
               baseUrl,
@@ -80,7 +80,7 @@ const JoinGameWizard = ({
         <>
           <p className="block text-gray-700 m-4">Joined!</p>
           <button
-            className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
             onClick={() => reportReady(socket, setIsReady)}
             disabled={isReady}
           >

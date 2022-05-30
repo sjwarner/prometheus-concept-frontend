@@ -37,6 +37,7 @@ const OnlinePrometheusBoard = ({
     JSON.parse(JSON.stringify(povInitialGameState))
   );
   const [winner, setWinner] = useState(null);
+  const [hasRequestedRematch, setHasRequestedRematch] = useState(false);
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
     useState(false);
 
@@ -85,6 +86,7 @@ const OnlinePrometheusBoard = ({
   });
 
   socket.on("resetGame", (startingPlayer) => {
+    setHasRequestedRematch(false);
     setHasOpponentRequestedRematch(false);
 
     const isStartingPlayer = players[startingPlayer].name === username;
@@ -196,6 +198,8 @@ const OnlinePrometheusBoard = ({
   };
 
   const requestRematch = () => {
+    setHasRequestedRematch(true);
+    console.log("bang");
     socket.emit("requestRematch", username);
   };
 
@@ -231,6 +235,7 @@ const OnlinePrometheusBoard = ({
           isPlayerTurn={isPlayerTurn}
           isSpherePlaced={isSpherePlaced}
           winner={winner}
+          hasRequestedRematch={hasRequestedRematch}
           hasOpponentRequestedRematch={hasOpponentRequestedRematch}
           requestRematch={requestRematch}
         />
