@@ -73,7 +73,9 @@ const CreateGameWizard = ({
         </div>
       )}
 
-      {isInRoom && <PlayerList players={players} setPlayers={setPlayers} />}
+      {isInRoom && (
+        <PlayerList socket={socket} players={players} setPlayers={setPlayers} />
+      )}
 
       {canStart && (
         <button
