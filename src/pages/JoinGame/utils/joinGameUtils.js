@@ -93,9 +93,4 @@ const joinParty = (
   socket.on("startGame", () => {
     setIsGameStarted(true);
   });
-
-  socket.on("disconnect", function () {
-    console.log("You've lost connection with the server");
-    socket.close();
-  });
 };
