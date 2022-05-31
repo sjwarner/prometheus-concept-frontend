@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
 import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
 
@@ -63,6 +63,75 @@ const OnlinePrometheusBoard = ({
     setFirstTurn(true);
   }, [inProgress]);
 
+  const joinParty = useCallback(() => {
+    socket.on("updatePlayerTurn", (newPlayerTurnUsername) => {
+      setIsPlayerTurn(newPlayerTurnUsername === username);
+    });
+
+    socket.on("updateGameState", (newGameState) => {
+      setLastMove(
+        gameState.map((row, x) =>
+          row.map((square, y) => square !== newGameState[x][y])
+        )
+      );
+      setGameState(newGameState);
+    });
+
+    socket.on("updatePlayerWon", (winningUsername) => {
+      setWinner(winningUsername);
+      setInProgress(false);
+    });
+
+    socket.on("opponentRequestedRematch", () => {
+      setHasOpponentRequestedRematch(true);
+    });
+
+    socket.on("resetGame", (startingPlayer) => {
+      setHasRequestedRematch(false);
+      setHasOpponentRequestedRematch(false);
+
+      const isStartingPlayer = players[startingPlayer].name === username;
+      setPlayerNumber(isStartingPlayer ? Players.WHITE : Players.BLACK);
+      setPovInitialGameState(
+        isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
+      );
+      setIsPlayerTurn(isStartingPlayer);
+
+      resetGame(isStartingPlayer);
+    });
+
+    socket.on("connect", () => {
+      console.log("You've connected to the server");
+      setIsDisconnected(false);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("You've lost connection with the server");
+      setIsDisconnected(true);
+      setDisconnectedMessage("Disconnected from server.");
+      socket.close();
+    });
+
+    socket.on("playerDisconnected", (disconnectedReason) => {
+      console.log("Opponent left game");
+      setIsDisconnected(true);
+      setDisconnectedMessage(disconnectedReason);
+    });
+  }, [
+    gameState,
+    players,
+    setDisconnectedMessage,
+    setIsDisconnected,
+    socket,
+    username,
+  ]);
+
+  useEffect(() => {
+    if (socket) {
+      joinParty();
+    }
+  }, [socket, joinParty]);
+
   const makeMove = (rank, file) =>
     !isSpherePlaced
       ? addSphere(rank, file)
@@ -71,60 +140,6 @@ const OnlinePrometheusBoard = ({
       : originRank === rank && originFile === file
       ? clearCandidatePiece()
       : movePiece(rank, file);
-
-  socket.on("updatePlayerTurn", (newPlayerTurnUsername) => {
-    setIsPlayerTurn(newPlayerTurnUsername === username);
-  });
-
-  socket.on("updateGameState", (newGameState) => {
-    setLastMove(
-      gameState.map((row, x) =>
-        row.map((square, y) => square !== newGameState[x][y])
-      )
-    );
-    setGameState(newGameState);
-  });
-
-  socket.on("updatePlayerWon", (winningUsername) => {
-    setWinner(winningUsername);
-    setInProgress(false);
-  });
-
-  socket.on("opponentRequestedRematch", () => {
-    setHasOpponentRequestedRematch(true);
-  });
-
-  socket.on("resetGame", (startingPlayer) => {
-    setHasRequestedRematch(false);
-    setHasOpponentRequestedRematch(false);
-
-    const isStartingPlayer = players[startingPlayer].name === username;
-    setPlayerNumber(isStartingPlayer ? Players.WHITE : Players.BLACK);
-    setPovInitialGameState(
-      isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
-    );
-    setIsPlayerTurn(isStartingPlayer);
-
-    resetGame(isStartingPlayer);
-  });
-
-  socket.on("connect", () => {
-    console.log("You've connected to the server");
-    setIsDisconnected(false);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("You've lost connection with the server");
-    setIsDisconnected(true);
-    setDisconnectedMessage("Disconnected from server.");
-    socket.close();
-  });
-
-  socket.on("playerDisconnected", (disconnectedReason) => {
-    console.log("Opponent left game");
-    setIsDisconnected(true);
-    setDisconnectedMessage(disconnectedReason);
-  });
 
   const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
@@ -181,6 +196,7 @@ const OnlinePrometheusBoard = ({
   };
 
   const movePiece = (destinationRank, destinationFile) => {
+    console.log("moved piece");
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
       // Use a deep copy of gameState to work out previous move highlighting
       let oldGameState = JSON.parse(JSON.stringify(gameState));
