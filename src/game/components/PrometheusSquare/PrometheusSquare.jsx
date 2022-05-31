@@ -41,7 +41,9 @@ const PrometheusSquare = ({
     <div
       className={`square square-${colour} ${
         selected ? "square-selected" : ""
-      } ${valid ? "square-valid" : ""} ${lastMove ? "square-previous" : ""}`}
+      } ${valid ? "square-valid" : ""} ${
+        lastMove && !valid ? "square-previous" : ""
+      }`}
       onClick={onClick}
     >
       {renderPiece(piece, colour)}
