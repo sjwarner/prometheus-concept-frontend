@@ -52,6 +52,14 @@
   );
 }
 
+.square-previous {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 0, 0.5),
+    rgba(255, 255, 0, 0.5)
+  );
+}
+
 .sphere {
   height: 80%;
   border-radius: 50%;

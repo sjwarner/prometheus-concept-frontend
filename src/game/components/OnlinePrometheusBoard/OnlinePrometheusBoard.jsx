@@ -36,6 +36,9 @@ const OnlinePrometheusBoard = ({
     // Stringify hack to deep clone InitialGameState - avoids mutation.
     JSON.parse(JSON.stringify(povInitialGameState))
   );
+  const [lastMove, setLastMove] = useState(
+    Array.from({ length: 8 }, (_) => new Array(8).fill(false))
+  );
   const [winner, setWinner] = useState(null);
   const [hasRequestedRematch, setHasRequestedRematch] = useState(false);
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
@@ -47,6 +50,7 @@ const OnlinePrometheusBoard = ({
     setGameState(
       isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
     );
+    setLastMove(Array.from({ length: 8 }, (_) => new Array(8).fill(false)));
     setIsSpherePlaced(false);
   };
 
@@ -73,6 +77,11 @@ const OnlinePrometheusBoard = ({
   });
 
   socket.on("updateGameState", (newGameState) => {
+    setLastMove(
+      gameState.map((row, x) =>
+        row.map((square, y) => square !== newGameState[x][y])
+      )
+    );
     setGameState(newGameState);
   });
 
@@ -127,11 +136,18 @@ const OnlinePrometheusBoard = ({
         : selectedSquare.toLowerCase();
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
+      // Use a deep copy of gameState to work out previous move highlighting
+      let oldGameState = JSON.parse(JSON.stringify(gameState));
       let tmp = gameState;
       tmp[rank][file] =
         playerNumber === Players.WHITE
           ? Pieces.WHITE_SPHERE
           : Pieces.BLACK_SPHERE;
+      setLastMove(
+        oldGameState.map((row, x) =>
+          row.map((square, y) => square !== tmp[x][y])
+        )
+      );
       setGameState(tmp);
       setIsSpherePlaced(true);
 
@@ -166,6 +182,8 @@ const OnlinePrometheusBoard = ({
 
   const movePiece = (destinationRank, destinationFile) => {
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
+      // Use a deep copy of gameState to work out previous move highlighting
+      let oldGameState = JSON.parse(JSON.stringify(gameState));
       let tmp = gameState;
       let winningMove = false;
       if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
@@ -176,6 +194,11 @@ const OnlinePrometheusBoard = ({
       }
       tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
       tmp[originRank][originFile] = "";
+      setLastMove(
+        oldGameState.map((row, x) =>
+          row.map((square, y) => square !== tmp[x][y])
+        )
+      );
       setGameState(tmp);
       setOriginRank(null);
       setOriginFile(null);
@@ -218,6 +241,7 @@ const OnlinePrometheusBoard = ({
                         colour={(x + y) % 2 === 0 ? "black" : "white"}
                         piece={gameState[x][y]}
                         selected={x === originRank && y === originFile}
+                        lastMove={lastMove[x][y]}
                         valid={isArrayInArray(validMoves, [x, y])}
                         onClick={() => {
                           if (inProgress && isPlayerTurn) makeMove(x, y);
