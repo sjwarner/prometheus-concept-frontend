@@ -196,7 +196,6 @@ const OnlinePrometheusBoard = ({
   };
 
   const movePiece = (destinationRank, destinationFile) => {
-    console.log("moved piece");
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
       // Use a deep copy of gameState to work out previous move highlighting
       let oldGameState = JSON.parse(JSON.stringify(gameState));
