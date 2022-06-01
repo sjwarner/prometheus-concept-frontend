@@ -41,11 +41,17 @@ const OnlinePrometheusBoard = ({
     Array.from({ length: 8 }, (_) => new Array(8).fill(false))
   );
   const [winner, setWinner] = useState(null);
+
+  const [hasResigned, setHasResigned] = useState(false);
+  const [hasOpponentResigned, setHasOpponentResigned] = useState(false);
+
   const [hasRequestedRematch, setHasRequestedRematch] = useState(false);
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
     useState(false);
 
   const resetGame = (isStartingPlayer) => {
+    setHasResigned(false);
+    setHasOpponentResigned(false);
     setInProgress(true);
     setWinner(null);
     setGameState(
@@ -80,6 +86,12 @@ const OnlinePrometheusBoard = ({
 
     socket.on("updatePlayerWon", (winningUsername) => {
       setWinner(winningUsername);
+      setInProgress(false);
+    });
+
+    socket.on("opponentResigned", () => {
+      console.log("opponent resigned event");
+      setHasOpponentResigned(true);
       setInProgress(false);
     });
 
@@ -279,13 +291,22 @@ const OnlinePrometheusBoard = ({
             isPlayerTurn={isPlayerTurn}
             isSpherePlaced={isSpherePlaced}
             winner={winner}
+            hasResigned={hasResigned}
+            hasOpponentResigned={hasOpponentResigned}
             hasRequestedRematch={hasRequestedRematch}
             hasOpponentRequestedRematch={hasOpponentRequestedRematch}
             requestRematch={requestRematch}
           />
         </div>
       </div>
-      <BoardSidePane gameState={gameState} />
+      <BoardSidePane
+        gameState={gameState}
+        socket={socket}
+        hasResigned={hasResigned}
+        setHasResigned={setHasResigned}
+        inProgress={inProgress}
+        setInProgress={setInProgress}
+      />
     </>
   );
 };
