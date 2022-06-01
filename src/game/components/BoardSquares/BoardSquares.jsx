@@ -25,10 +25,15 @@ const BoardSquares = ({
                   colour={(x + y) % 2 === 0 ? "black" : "white"}
                   piece={gameState[x][y]}
                   selected={x === originRank && y === originFile}
-                  lastMove={lastMove[x][y]}
+                  lastMove={lastMove ? lastMove[x][y] : null}
                   valid={isArrayInArray(validMoves, [x, y])}
                   onClick={() => {
-                    if (inProgress && isPlayerTurn) makeMove(x, y);
+                    // Online play, if in progress and is player turn - Offline play, if in progress and player turn undefined
+                    if (
+                      (inProgress && isPlayerTurn) ||
+                      (inProgress && isPlayerTurn === undefined)
+                    )
+                      makeMove(x, y);
                   }}
                   key={y}
                 />

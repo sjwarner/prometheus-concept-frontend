@@ -22,7 +22,7 @@ const OnlinePrometheusBoard = ({
   setDisconnectedMessage,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
-  const [isPlayerTurn, setIsPlayerTurn] = useState(null);
+  const [isPlayerTurn, setIsPlayerTurn] = useState(false);
   const [playerNumber, setPlayerNumber] = useState(initialPlayerNumber);
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
