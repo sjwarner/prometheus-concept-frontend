@@ -1,5 +1,6 @@
 import React from "react";
 import Caption from "../Caption/Caption";
+import Button from "../../../general/components/Button/Button";
 
 import Players from "../../logic/Players";
 import { InitialGameStateWhite } from "../../logic/InitialGameState";
@@ -44,12 +45,9 @@ const LocalBoardCaption = ({
         <Caption>{turn === Players.WHITE ? "White" : "Black"}'s turn.</Caption>
       )}
       {!inProgress && (
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => resetGame()}
-        >
+        <Button onClick={() => resetGame()}>
           {winner ? "Play again?" : "Start!"}
-        </button>
+        </Button>
       )}
     </div>
   );

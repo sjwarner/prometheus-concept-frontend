@@ -1,5 +1,6 @@
 import React from "react";
 import Caption from "../Caption/Caption";
+import Button from "../../../general/components/Button/Button";
 
 const OnlineBoardCaption = ({
   inProgress,
@@ -31,15 +32,9 @@ const OnlineBoardCaption = ({
       )}
       {isGameDrawn && <Caption>Game drawn!</Caption>}
       {!inProgress && (
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
-          onClick={() => {
-            requestRematch();
-          }}
-          disabled={hasRequestedRematch}
-        >
+        <Button onClick={() => requestRematch()} disabled={hasRequestedRematch}>
           Rematch?
-        </button>
+        </Button>
       )}
       {!inProgress && hasRequestedRematch && (
         <Caption>Requested rematch. Waiting for opponent...</Caption>

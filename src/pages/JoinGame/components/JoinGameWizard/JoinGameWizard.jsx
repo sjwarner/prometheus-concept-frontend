@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../../../../general/components/Button/Button";
 import { attemptJoinParty, reportReady } from "../../utils/joinGameUtils";
 
 const JoinGameWizard = ({
@@ -54,8 +55,7 @@ const JoinGameWizard = ({
       </div>
       {hasError && <div className="mt-4">{errorMessage}</div>}
       {!isLoading && !isInRoom && (
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
+        <Button
           onClick={() =>
             attemptJoinParty(
               baseUrl,
@@ -73,19 +73,18 @@ const JoinGameWizard = ({
           disabled={isLoading}
         >
           Join game
-        </button>
+        </Button>
       )}
 
       {isInRoom && !isReady && (
         <>
           <p className="block text-gray-700 m-4">Joined!</p>
-          <button
-            className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
+          <Button
             onClick={() => reportReady(socket, setIsReady)}
             disabled={isReady}
           >
             Ready?
-          </button>
+          </Button>
         </>
       )}
       {isInRoom && isReady && (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../../../../general/components/Button/Button";
 import PlayerList from "../../../../general/components/PlayerList/PlayerList";
 import { createParty, startGame } from "../../utils/createGameUtils";
 import FeatherIcon from "feather-icons-react";
@@ -39,8 +40,7 @@ const CreateGameWizard = ({
       />
       {hasError && <div className="mt-4">{errorMessage}</div>}
       {!isLoading && !roomCode && (
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        <Button
           onClick={() =>
             createParty(
               baseUrl,
@@ -53,7 +53,7 @@ const CreateGameWizard = ({
           }
         >
           Create game
-        </button>
+        </Button>
       )}
 
       {roomCode && (
@@ -61,14 +61,9 @@ const CreateGameWizard = ({
           <p className="m-auto">Room Code:&nbsp;</p>
           <div className="flex">
             <b className="m-auto">{roomCode}&nbsp;</b>
-            <button
-              className="block m-auto bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border border-gray-400 rounded shadow"
-              onClick={() => {
-                navigator.clipboard.writeText(roomCode);
-              }}
-            >
+            <Button onClick={() => navigator.clipboard.writeText(roomCode)}>
               <FeatherIcon icon="clipboard" alt="Copy room code" />
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -78,12 +73,9 @@ const CreateGameWizard = ({
       )}
 
       {canStart && (
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={() => startGame(socket, players, setIsGameStarted)}
-        >
+        <Button onClick={() => startGame(socket, players, setIsGameStarted)}>
           Start Game
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import Caption from "../../Caption/Caption";
+import Button from "../../../../general/components/Button/Button";
 
 const DrawOrResignWidget = ({
   socket,
@@ -16,8 +17,7 @@ const DrawOrResignWidget = ({
   return (
     <>
       <div className="flex flex-row lg:flex-col">
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        <Button
           onClick={() => {
             if (!hasOfferedDraw) {
               setHasOfferedDraw(true);
@@ -29,9 +29,8 @@ const DrawOrResignWidget = ({
           }}
         >
           {!hasOfferedDraw ? "Offer Draw" : "Cancel Offer"}
-        </button>
-        <button
-          className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
+        </Button>
+        <Button
           disabled={hasResigned || !inProgress}
           onClick={() => {
             setHasResigned(true);
@@ -40,14 +39,13 @@ const DrawOrResignWidget = ({
           }}
         >
           Resign
-        </button>
+        </Button>
       </div>
       {hasOpponentOfferedDraw && (
         <>
           <Caption>Opponent offered draw:</Caption>
           <div className="flex flex-row lg:flex-col">
-            <button
-              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
+            <Button
               disabled={hasOfferedDraw || !inProgress}
               onClick={() => {
                 setHasOpponentOfferedDraw(false);
@@ -57,9 +55,8 @@ const DrawOrResignWidget = ({
               }}
             >
               Accept
-            </button>
-            <button
-              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
+            </Button>
+            <Button
               disabled={hasOfferedDraw || !inProgress}
               onClick={() => {
                 setHasOpponentOfferedDraw(false);
@@ -67,7 +64,7 @@ const DrawOrResignWidget = ({
               }}
             >
               Decline
-            </button>
+            </Button>
           </div>
         </>
       )}
