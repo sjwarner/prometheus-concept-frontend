@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 import Players from "../../game/logic/Players";
-import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/OnlinePrometheusBoard";
+import OnlineBoard from "../../game/components/OnlineBoard/OnlineBoard";
 import JoinGameWizard from "./components/JoinGameWizard/JoinGameWizard";
 import Modal from "../../general/components/Modal/Modal";
 
@@ -40,7 +40,7 @@ const JoinGamePage = () => {
         />
       )}
       {isGameStarted && (
-        <OnlinePrometheusBoard
+        <OnlineBoard
           socket={socket}
           isGameStarted={isGameStarted}
           initialPlayerNumber={

@@ -1,4 +1,6 @@
 import React from "react";
+import Caption from "../Caption/Caption";
+
 import Players from "../../logic/Players";
 import { InitialGameStateWhite } from "../../logic/InitialGameState";
 
@@ -28,24 +30,18 @@ const LocalBoardCaption = ({
   return (
     <div className="mt-4 mb-4">
       {winner && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
+        <Caption>
           🎉 {winner === Players.WHITE ? "Player One" : "Player Two"} won! 🎉
-        </span>
+        </Caption>
       )}
       {inProgress && !playerOneSpherePlaced && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Place Player One's sphere.
-        </span>
+        <Caption>Place Player One's sphere.</Caption>
       )}
       {inProgress && playerOneSpherePlaced && !playerTwoSpherePlaced && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Place Player Two's sphere.
-        </span>
+        <Caption>Place Player Two's sphere.</Caption>
       )}
       {inProgressWithSpheresPlaced && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          {turn === Players.WHITE ? "White" : "Black"}'s turn.
-        </span>
+        <Caption>{turn === Players.WHITE ? "White" : "Black"}'s turn.</Caption>
       )}
       {!inProgress && (
         <button

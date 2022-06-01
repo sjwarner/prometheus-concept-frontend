@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import BoardSquares from "../BoardSquares/BoardSquares";
 import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
-import BoardSidePane from "../BoardSidePane/BoardSidePane";
+import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 
 import {
   InitialGameStateWhite,
@@ -12,7 +12,7 @@ import Players from "../../logic/Players";
 
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 
-const OnlinePrometheusBoard = ({
+const OnlineBoard = ({
   socket,
   isGameStarted,
   initialPlayerNumber,
@@ -329,4 +329,4 @@ const OnlinePrometheusBoard = ({
   );
 };
 
-export default OnlinePrometheusBoard;
+export default OnlineBoard;

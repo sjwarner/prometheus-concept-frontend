@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-import OnlinePrometheusBoard from "../../game/components/OnlinePrometheusBoard/OnlinePrometheusBoard";
+import OnlineBoard from "../../game/components/OnlineBoard/OnlineBoard";
 import CreateGameWizard from "./components/CreateGameWizard/CreateGameWizard";
 
 import Players from "../../game/logic/Players";
@@ -115,7 +115,7 @@ const CreateGamePage = () => {
           />
         )}
         {isGameStarted && (
-          <OnlinePrometheusBoard
+          <OnlineBoard
             socket={socket}
             isGameStarted={isGameStarted}
             initialPlayerNumber={

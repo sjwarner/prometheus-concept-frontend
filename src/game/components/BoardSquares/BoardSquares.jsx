@@ -1,5 +1,5 @@
 import React from "react";
-import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
+import BoardSquare from "../BoardSquare/BoardSquare";
 import { isArrayInArray } from "../../logic/utils";
 
 const BoardSquares = ({
@@ -21,7 +21,7 @@ const BoardSquares = ({
             .fill(1)
             .map((el, y) => {
               return (
-                <PrometheusSquare
+                <BoardSquare
                   colour={(x + y) % 2 === 0 ? "black" : "white"}
                   piece={gameState[x][y]}
                   selected={x === originRank && y === originFile}

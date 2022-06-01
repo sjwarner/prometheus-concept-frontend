@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import BoardSquares from "../BoardSquares/BoardSquares";
 import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
-import BoardSidePane from "../BoardSidePane/BoardSidePane";
+import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 
-const LocalPrometheusBoard = ({
+const LocalBoard = ({
   inProgress,
   setInProgress,
   playerOneSpherePlaced,
@@ -152,4 +152,4 @@ const LocalPrometheusBoard = ({
   );
 };
 
-export default LocalPrometheusBoard;
+export default LocalBoard;

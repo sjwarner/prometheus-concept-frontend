@@ -1,4 +1,5 @@
 import React from "react";
+import Caption from "../Caption/Caption";
 
 const OnlineBoardCaption = ({
   inProgress,
@@ -15,40 +16,20 @@ const OnlineBoardCaption = ({
   return (
     <div className="mt-4 mb-4">
       {inProgress && isPlayerTurn && !isSpherePlaced && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Place your sphere.
-        </span>
+        <Caption>Place your sphere.</Caption>
       )}
       {inProgress && isPlayerTurn && isSpherePlaced && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Make your move!
-        </span>
+        <Caption>Make your move!</Caption>
       )}
       {inProgress && !isPlayerTurn && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Waiting for opponent...
-        </span>
+        <Caption>Waiting for opponent...</Caption>
       )}
-      {winner && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          🎉 {winner} won! 🎉
-        </span>
-      )}
-      {hasResigned && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          You resigned.
-        </span>
-      )}
+      {winner && <Caption>🎉 {winner} won! 🎉</Caption>}
+      {hasResigned && <Caption>You resigned.</Caption>}
       {hasOpponentResigned && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          🎉 You win, opponent resigned! 🎉
-        </span>
+        <Caption>🎉 You win, opponent resigned! 🎉</Caption>
       )}
-      {isGameDrawn && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Game drawn!
-        </span>
-      )}
+      {isGameDrawn && <Caption>Game drawn!</Caption>}
       {!inProgress && (
         <button
           className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
@@ -61,14 +42,10 @@ const OnlineBoardCaption = ({
         </button>
       )}
       {!inProgress && hasRequestedRematch && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Requested rematch. Waiting for opponent...
-        </span>
+        <Caption>Requested rematch. Waiting for opponent...</Caption>
       )}
       {!inProgress && hasOpponentRequestedRematch && (
-        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
-          Opponent has requested rematch.
-        </span>
+        <Caption>Opponent has requested rematch.</Caption>
       )}
     </div>
   );

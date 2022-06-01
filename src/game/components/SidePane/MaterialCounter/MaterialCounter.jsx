@@ -1,5 +1,5 @@
 import React from "react";
-import { renderPiece } from "../../logic/utils";
+import { renderPiece } from "../../../logic/utils";
 
 const MaterialCounter = ({ gameState, piece }) => {
   return (

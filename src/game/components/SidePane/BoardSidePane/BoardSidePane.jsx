@@ -1,5 +1,5 @@
 import React from "react";
-import Pieces from "../../logic/Pieces";
+import Pieces from "../../../logic/Pieces";
 import MaterialCounter from "../MaterialCounter/MaterialCounter";
 import DrawOrResignWidget from "../DrawOrResignPanel/DrawOrResignWidget";
 

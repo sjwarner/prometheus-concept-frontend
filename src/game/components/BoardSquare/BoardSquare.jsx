@@ -1,14 +1,7 @@
 import React from "react";
 import { renderPiece } from "../../logic/utils";
 
-const PrometheusSquare = ({
-  colour,
-  piece,
-  selected,
-  lastMove,
-  valid,
-  onClick,
-}) => {
+const BoardSquare = ({ colour, piece, selected, lastMove, valid, onClick }) => {
   return (
     <div
       className={`square square-${colour} ${
@@ -23,4 +16,4 @@ const PrometheusSquare = ({
   );
 };
 
-export default PrometheusSquare;
+export default BoardSquare;
