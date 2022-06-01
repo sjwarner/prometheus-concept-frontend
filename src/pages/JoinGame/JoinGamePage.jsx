@@ -26,44 +26,42 @@ const JoinGamePage = () => {
   }, [baseUrl, roomCode]);
 
   return (
-    <div className="p-8 px-12 flex flex-col md:flex-row items-center">
-      <div className="app p-8 flex flex-row justify-center items-center w-full">
-        {!isGameStarted && (
-          <JoinGameWizard
-            baseUrl={baseUrl}
-            socket={socket}
-            username={username}
-            setUsername={setUsername}
-            roomCode={roomCode}
-            setRoomCode={setRoomCode}
-            setPlayers={setPlayers}
-            setIsGameStarted={setIsGameStarted}
-          />
-        )}
-        {isGameStarted && (
-          <OnlinePrometheusBoard
-            socket={socket}
-            isGameStarted={isGameStarted}
-            initialPlayerNumber={
-              players.findIndex((player) => player.name === username) === 0
-                ? Players.WHITE
-                : Players.BLACK
-            }
-            players={players}
-            username={username}
-            setIsDisconnected={setIsDisconnected}
-            setDisconnectedMessage={setDisconnectedMessage}
-          />
-        )}
-        {isDisconnected && (
-          <Modal type="Error">
-            {disconnectedMessage}
-            <br />
-            Game will be terminated.
-            <br />
-          </Modal>
-        )}
-      </div>
+    <div className="app p-8 px-12 flex flex-col lg:flex-row justify-center items-center w-full">
+      {!isGameStarted && (
+        <JoinGameWizard
+          baseUrl={baseUrl}
+          socket={socket}
+          username={username}
+          setUsername={setUsername}
+          roomCode={roomCode}
+          setRoomCode={setRoomCode}
+          setPlayers={setPlayers}
+          setIsGameStarted={setIsGameStarted}
+        />
+      )}
+      {isGameStarted && (
+        <OnlinePrometheusBoard
+          socket={socket}
+          isGameStarted={isGameStarted}
+          initialPlayerNumber={
+            players.findIndex((player) => player.name === username) === 0
+              ? Players.WHITE
+              : Players.BLACK
+          }
+          players={players}
+          username={username}
+          setIsDisconnected={setIsDisconnected}
+          setDisconnectedMessage={setDisconnectedMessage}
+        />
+      )}
+      {isDisconnected && (
+        <Modal type="Error">
+          {disconnectedMessage}
+          <br />
+          Game will be terminated.
+          <br />
+        </Modal>
+      )}
     </div>
   );
 };

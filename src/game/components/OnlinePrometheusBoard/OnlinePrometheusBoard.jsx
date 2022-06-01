@@ -245,7 +245,7 @@ const OnlinePrometheusBoard = ({
 
   return (
     <>
-      <div className="board flex flex-row">
+      <div className="board flex flex-row m-auto lg:ml-0">
         <div className="content">
           {Array(8)
             .fill(1)
@@ -287,7 +287,7 @@ const OnlinePrometheusBoard = ({
           />
         </div>
       </div>
-      <div className="w-64 flex flex-col justify-center items-center">
+      <div className="w-64 flex flex-row lg:flex-col justify-center items-center">
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Tetrahedron colour="white" />

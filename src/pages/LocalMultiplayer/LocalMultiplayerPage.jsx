@@ -17,7 +17,7 @@ const LocalMultiplayerPage = () => {
   const [turn, setTurn] = useState(Players.WHITE);
 
   return (
-    <div className="app p-8 flex flex-col justify-center items-center">
+    <div className="app p-8 px-12 flex flex-col lg:flex-row justify-center items-center w-full">
       <LocalPrometheusBoard
         inProgress={inProgress}
         setInProgress={setInProgress}
