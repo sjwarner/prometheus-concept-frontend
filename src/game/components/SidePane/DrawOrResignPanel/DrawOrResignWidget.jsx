@@ -18,6 +18,7 @@ const DrawOrResignWidget = ({
     <>
       <div className="flex flex-row lg:flex-col">
         <Button
+          disabled={!inProgress}
           onClick={() => {
             if (!hasOfferedDraw) {
               setHasOfferedDraw(true);
