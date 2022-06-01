@@ -10,6 +10,7 @@ export const attemptJoinParty = (
   setIsLoading,
   setIsInRoom,
   setPlayers,
+  setInitialGameState,
   setIsGameStarted
 ) => {
   if (!username) {
@@ -39,6 +40,7 @@ export const attemptJoinParty = (
           setErrorMessage,
           setHasError,
           setPlayers,
+          setInitialGameState,
           setIsGameStarted
         );
       } else {
@@ -69,6 +71,7 @@ const joinParty = (
   setErrorMessage,
   setHasError,
   setPlayers,
+  setInitialGameState,
   setIsGameStarted
 ) => {
   socket.emit("setName", username);
@@ -95,6 +98,11 @@ const joinParty = (
   });
 
   socket.on("startGame", () => {
+    setIsGameStarted(true);
+  });
+
+  socket.on("startRandomGame", (gameState) => {
+    setInitialGameState(gameState);
     setIsGameStarted(true);
   });
 };

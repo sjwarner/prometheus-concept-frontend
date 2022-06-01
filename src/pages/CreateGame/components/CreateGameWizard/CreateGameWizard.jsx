@@ -3,6 +3,7 @@ import Button from "../../../../general/components/Button/Button";
 import PlayerList from "../../../../general/components/PlayerList/PlayerList";
 import { createParty, startGame } from "../../utils/createGameUtils";
 import FeatherIcon from "feather-icons-react";
+import GameModes from "../../../../game/logic/GameModes";
 
 const CreateGameWizard = ({
   baseUrl,
@@ -18,6 +19,7 @@ const CreateGameWizard = ({
   canStart,
   socket,
   setIsGameStarted,
+  setInitialGameState,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
@@ -76,9 +78,34 @@ const CreateGameWizard = ({
       )}
 
       {canStart && (
-        <Button onClick={() => startGame(socket, players, setIsGameStarted)}>
-          Start Game
-        </Button>
+        <div className="flex flex-row mb-4">
+          <Button
+            onClick={() =>
+              startGame(
+                socket,
+                players,
+                setIsGameStarted,
+                setInitialGameState,
+                GameModes.ORIGINAL
+              )
+            }
+          >
+            Original Mode
+          </Button>
+          <Button
+            onClick={() =>
+              startGame(
+                socket,
+                players,
+                setIsGameStarted,
+                setInitialGameState,
+                GameModes.RANDOM
+              )
+            }
+          >
+            Fischer Random
+          </Button>
+        </div>
       )}
     </div>
   );

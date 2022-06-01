@@ -9,6 +9,7 @@ import {
 } from "../../logic/InitialGameState";
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
+import GameModes from "../../logic/GameModes";
 
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 
@@ -20,6 +21,8 @@ const OnlineBoard = ({
   username,
   setIsDisconnected,
   setDisconnectedMessage,
+  gameMode,
+  initialGameState,
 }) => {
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
@@ -28,9 +31,15 @@ const OnlineBoard = ({
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
   const [povInitialGameState, setPovInitialGameState] = useState(
-    playerNumber === Players.WHITE
-      ? InitialGameStateWhite
-      : InitialGameStateBlack
+    gameMode === GameModes.ORIGINAL
+      ? playerNumber === Players.WHITE
+        ? InitialGameStateWhite
+        : InitialGameStateBlack
+      : playerNumber === Players.WHITE
+      ? initialGameState
+      : initialGameState.map(
+          (item, index) => initialGameState[initialGameState.length - 1 - index]
+        )
   );
 
   const [gameState, setGameState] = useState(

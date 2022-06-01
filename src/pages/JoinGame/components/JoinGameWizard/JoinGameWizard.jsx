@@ -10,6 +10,7 @@ const JoinGameWizard = ({
   setRoomCode,
   socket,
   setPlayers,
+  setInitialGameState,
   setIsGameStarted,
 }) => {
   const [isReady, setIsReady] = useState(false);
@@ -67,6 +68,7 @@ const JoinGameWizard = ({
               setIsLoading,
               setIsInRoom,
               setPlayers,
+              setInitialGameState,
               setIsGameStarted
             )
           }

@@ -11,6 +11,7 @@ const JoinGamePage = () => {
   const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState("");
   const [roomCode, setRoomCode] = useState(null);
+  const [initialGameState, setInitialGameState] = useState(null);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [players, setPlayers] = useState(null);
 
@@ -36,6 +37,7 @@ const JoinGamePage = () => {
           roomCode={roomCode}
           setRoomCode={setRoomCode}
           setPlayers={setPlayers}
+          setInitialGameState={setInitialGameState}
           setIsGameStarted={setIsGameStarted}
         />
       )}
@@ -48,6 +50,7 @@ const JoinGamePage = () => {
               ? Players.WHITE
               : Players.BLACK
           }
+          initialGameState={initialGameState}
           players={players}
           username={username}
           setIsDisconnected={setIsDisconnected}

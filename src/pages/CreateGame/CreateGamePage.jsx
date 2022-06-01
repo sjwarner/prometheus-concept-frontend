@@ -14,6 +14,8 @@ const CreateGamePage = () => {
   const [roomCode, setRoomCode] = useState(null);
   const [isInRoom, setIsInRoom] = useState(false);
   const [canStart, setCanStart] = useState(false);
+  const [gameMode, setGameMode] = useState(null);
+  const [initialGameState, setInitialGameState] = useState(null);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [players, setPlayers] = useState(null);
 
@@ -112,6 +114,8 @@ const CreateGamePage = () => {
             canStart={canStart}
             socket={socket}
             setIsGameStarted={setIsGameStarted}
+            setGameMode={setGameMode}
+            setInitialGameState={setInitialGameState}
           />
         )}
         {isGameStarted && (
@@ -125,6 +129,8 @@ const CreateGamePage = () => {
             }
             players={players}
             username={username}
+            gameMode={gameMode}
+            initialGameState={initialGameState}
           />
         )}
       </div>

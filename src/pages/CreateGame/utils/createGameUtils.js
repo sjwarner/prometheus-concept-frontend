@@ -31,10 +31,21 @@ export const createParty = (
     });
 };
 
-export const startGame = (socket, players, setIsGameStarted) => {
-  socket.emit("startGameSignal", players);
+export const startGame = (
+  socket,
+  players,
+  setIsGameStarted,
+  setInitialGameState,
+  gameMode
+) => {
+  socket.emit("startGameSignal", players, gameMode);
 
   socket.on("startGame", () => {
+    setIsGameStarted(true);
+  });
+
+  socket.on("startRandomGame", (gameState) => {
+    setInitialGameState(gameState);
     setIsGameStarted(true);
   });
 };
