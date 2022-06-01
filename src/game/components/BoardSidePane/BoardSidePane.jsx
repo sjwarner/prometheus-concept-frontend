@@ -35,14 +35,18 @@ const BoardSidePane = ({
         <>
           <div className="flex flex-row lg:flex-col">
             <button
-              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"
-              disabled={hasOfferedDraw || !inProgress}
+              className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
               onClick={() => {
-                setHasOfferedDraw(true);
-                socket.emit("playerOfferedDraw", socket.id);
+                if (!hasOfferedDraw) {
+                  setHasOfferedDraw(true);
+                  socket.emit("playerOfferedDraw", socket.id);
+                } else {
+                  setHasOfferedDraw(false);
+                  socket.emit("playerWithdrewDrawOffer", socket.id);
+                }
               }}
             >
-              Offer Draw
+              {!hasOfferedDraw ? "Offer Draw" : "Cancel Offer"}
             </button>
             <button
               className="block m-auto mt-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow disabled:cursor-not-allowed disabled:opacity-50"

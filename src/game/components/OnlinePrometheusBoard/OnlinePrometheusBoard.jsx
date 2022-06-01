@@ -99,7 +99,6 @@ const OnlinePrometheusBoard = ({
     });
 
     socket.on("opponentWithdrewDrawOffer", () => {
-      console.log("Dealing with withdraw offer");
       setHasOpponentOfferedDraw(false);
     });
 
