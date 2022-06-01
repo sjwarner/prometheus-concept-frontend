@@ -37,9 +37,9 @@ const OnlineBoard = ({
         : InitialGameStateBlack
       : playerNumber === Players.WHITE
       ? initialGameState
-      : initialGameState.map(
-          (item, index) => initialGameState[initialGameState.length - 1 - index]
-        )
+      : JSON.parse(JSON.stringify(initialGameState))
+          .map((row) => row.reverse())
+          .reverse()
   );
 
   const [gameState, setGameState] = useState(
@@ -90,6 +90,8 @@ const OnlineBoard = ({
     });
 
     socket.on("updateGameState", (newGameState) => {
+      console.log(gameState);
+      console.log(newGameState);
       setLastMove(
         gameState.map((row, x) =>
           row.map((square, y) => square !== newGameState[x][y])
