@@ -3,7 +3,7 @@
 }
 
 .board {
-  margin: auto;
+  margin: auto auto auto 0;
   position: relative;
   width: 100%;
   max-width: 700px;
