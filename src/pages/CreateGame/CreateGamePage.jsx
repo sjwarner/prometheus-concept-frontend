@@ -87,37 +87,7 @@ const CreateGamePage = () => {
   }, [socket, joinParty]);
 
   return (
-    <div className="app p-8 flex flex-col justify-center items-center">
-      {!isGameStarted && (
-        <CreateGameWizard
-          baseUrl={baseUrl}
-          username={username}
-          setUsername={setUsername}
-          roomCode={roomCode}
-          setRoomCode={setRoomCode}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          isInRoom={isInRoom}
-          players={players}
-          setPlayers={setPlayers}
-          canStart={canStart}
-          socket={socket}
-          setIsGameStarted={setIsGameStarted}
-        />
-      )}
-      {isGameStarted && (
-        <OnlinePrometheusBoard
-          socket={socket}
-          isGameStarted={isGameStarted}
-          initialPlayerNumber={
-            players.findIndex((player) => player.name === username) === 0
-              ? Players.WHITE
-              : Players.BLACK
-          }
-          players={players}
-          username={username}
-        />
-      )}
+    <>
       {isDisconnected && (
         <Modal type="Error">
           {disconnectedMessage}
@@ -126,7 +96,39 @@ const CreateGamePage = () => {
           <br />
         </Modal>
       )}
-    </div>
+      <div className="app p-8 px-12 flex flex-col lg:flex-row justify-center items-center w-full">
+        {!isGameStarted && (
+          <CreateGameWizard
+            baseUrl={baseUrl}
+            username={username}
+            setUsername={setUsername}
+            roomCode={roomCode}
+            setRoomCode={setRoomCode}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            isInRoom={isInRoom}
+            players={players}
+            setPlayers={setPlayers}
+            canStart={canStart}
+            socket={socket}
+            setIsGameStarted={setIsGameStarted}
+          />
+        )}
+        {isGameStarted && (
+          <OnlinePrometheusBoard
+            socket={socket}
+            isGameStarted={isGameStarted}
+            initialPlayerNumber={
+              players.findIndex((player) => player.name === username) === 0
+                ? Players.WHITE
+                : Players.BLACK
+            }
+            players={players}
+            username={username}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

@@ -4,6 +4,9 @@ import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
 import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
+import Tetrahedron from "../Pieces/Tetrahedron";
+import Pyramid from "../Pieces/Pyramid";
+import Cube from "../Pieces/Cube";
 
 const LocalPrometheusBoard = ({
   inProgress,
@@ -119,46 +122,132 @@ const LocalPrometheusBoard = ({
   };
 
   return (
-    <div className="board flex flex-row">
-      <div className="content">
-        {Array(8)
-          .fill(1)
-          .map((el, x) => {
-            return (
-              <div id={`rank-${x}`} className="board-row flex flex-row" key={x}>
-                {Array(8)
-                  .fill(1)
-                  .map((el, y) => {
-                    return (
-                      <PrometheusSquare
-                        colour={(x + y) % 2 === 0 ? "black" : "white"}
-                        piece={gameState[x][y]}
-                        selected={x === originRank && y === originFile}
-                        valid={isArrayInArray(validMoves, [x, y])}
-                        onClick={() => {
-                          if (inProgress) makeMove(x, y);
-                        }}
-                        key={y}
-                      />
-                    );
-                  })}
-              </div>
-            );
-          })}
-        <LocalBoardCaption
-          inProgress={inProgress}
-          setInProgress={setInProgress}
-          winner={winner}
-          setWinner={setWinner}
-          setGameState={setGameState}
-          turn={turn}
-          playerOneSpherePlaced={playerOneSpherePlaced}
-          setPlayerOneSpherePlaced={setPlayerOneSpherePlaced}
-          playerTwoSpherePlaced={playerTwoSpherePlaced}
-          setPlayerTwoSpherePlaced={setPlayerTwoSpherePlaced}
-        />
+    <>
+      <div className="board flex flex-row m-auto lg:ml-0">
+        <div className="content">
+          {Array(8)
+            .fill(1)
+            .map((el, x) => {
+              return (
+                <div
+                  id={`rank-${x}`}
+                  className="board-row flex flex-row"
+                  key={x}
+                >
+                  {Array(8)
+                    .fill(1)
+                    .map((el, y) => {
+                      return (
+                        <PrometheusSquare
+                          colour={(x + y) % 2 === 0 ? "black" : "white"}
+                          piece={gameState[x][y]}
+                          selected={x === originRank && y === originFile}
+                          valid={isArrayInArray(validMoves, [x, y])}
+                          onClick={() => {
+                            if (inProgress) makeMove(x, y);
+                          }}
+                          key={y}
+                        />
+                      );
+                    })}
+                </div>
+              );
+            })}
+          <LocalBoardCaption
+            inProgress={inProgress}
+            setInProgress={setInProgress}
+            winner={winner}
+            setWinner={setWinner}
+            setGameState={setGameState}
+            turn={turn}
+            playerOneSpherePlaced={playerOneSpherePlaced}
+            setPlayerOneSpherePlaced={setPlayerOneSpherePlaced}
+            playerTwoSpherePlaced={playerTwoSpherePlaced}
+            setPlayerTwoSpherePlaced={setPlayerTwoSpherePlaced}
+          />
+        </div>
       </div>
-    </div>
+      <div className="w-64 flex flex-row lg:flex-col justify-center items-center">
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Tetrahedron colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "T").length,
+              0
+            )}
+          </span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Pyramid colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "P").length,
+              0
+            )}
+          </span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Cube colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "C").length,
+              0
+            )}
+          </span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Tetrahedron colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "t").length,
+              0
+            )}
+          </span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Pyramid colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "p").length,
+              0
+            )}
+          </span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Cube colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "c").length,
+              0
+            )}
+          </span>
+        </div>
+      </div>
+    </>
   );
 };
 
