@@ -117,6 +117,34 @@ const LocalBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
+
+      // If there are no more movable pieces for either side, the game is won
+      if (
+        gameState.reduce(
+          (currentCount, row) =>
+            currentCount +
+            row.filter(
+              (square) =>
+                square === square.toUpperCase() &&
+                ["S", ""].indexOf(square) === -1
+            ).length,
+          0
+        ) === 0 ||
+        gameState.reduce(
+          (currentCount, row) =>
+            currentCount +
+            row.filter(
+              (square) =>
+                square === square.toLowerCase() &&
+                ["s", ""].indexOf(square) === -1
+            ).length,
+          0
+        ) === 0
+      ) {
+        setWinner(turn);
+        setInProgress(false);
+      }
+
       setTurn(turn === Players.WHITE ? Players.BLACK : Players.WHITE);
     }
   };

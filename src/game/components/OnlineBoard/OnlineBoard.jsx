@@ -245,6 +245,8 @@ const OnlineBoard = ({
       let oldGameState = JSON.parse(JSON.stringify(gameState));
       let tmp = gameState;
       let winningMove = false;
+
+      // If the move takes a sphere, the game is won
       if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
         winningMove = true;
       }
@@ -262,6 +264,32 @@ const OnlineBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
+
+      // If there are no more movable pieces for either side, the game is won
+      if (
+        gameState.reduce(
+          (currentCount, row) =>
+            currentCount +
+            row.filter(
+              (square) =>
+                square === square.toUpperCase() &&
+                ["S", ""].indexOf(square) === -1
+            ).length,
+          0
+        ) === 0 ||
+        gameState.reduce(
+          (currentCount, row) =>
+            currentCount +
+            row.filter(
+              (square) =>
+                square === square.toLowerCase() &&
+                ["s", ""].indexOf(square) === -1
+            ).length,
+          0
+        ) === 0
+      ) {
+        winningMove = true;
+      }
 
       if (winningMove) {
         let reversedGameState = JSON.parse(JSON.stringify(gameState));
