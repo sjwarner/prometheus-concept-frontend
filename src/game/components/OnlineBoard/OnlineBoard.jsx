@@ -30,21 +30,21 @@ const OnlineBoard = ({
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
-  const [povInitialGameState, setPovInitialGameState] = useState(
-    gameMode === GameModes.ORIGINAL
-      ? playerNumber === Players.WHITE
-        ? InitialGameStateWhite
-        : InitialGameStateBlack
-      : playerNumber === Players.WHITE
-      ? initialGameState
-      : JSON.parse(JSON.stringify(initialGameState))
-          .map((row) => row.reverse())
-          .reverse()
-  );
-
   const [gameState, setGameState] = useState(
     // Stringify hack to deep clone InitialGameState - avoids mutation.
-    JSON.parse(JSON.stringify(povInitialGameState))
+    JSON.parse(
+      JSON.stringify(
+        gameMode === GameModes.ORIGINAL
+          ? playerNumber === Players.WHITE
+            ? InitialGameStateWhite
+            : InitialGameStateBlack
+          : playerNumber === Players.WHITE
+          ? initialGameState
+          : JSON.parse(JSON.stringify(initialGameState))
+              .map((row) => row.reverse())
+              .reverse()
+      )
+    )
   );
   const [lastMove, setLastMove] = useState(
     Array.from({ length: 8 }, (_) => new Array(8).fill(false))
@@ -62,15 +62,12 @@ const OnlineBoard = ({
   const [hasOpponentRequestedRematch, setHasOpponentRequestedRematch] =
     useState(false);
 
-  const resetGame = (isStartingPlayer) => {
+  const resetGame = () => {
     setIsGameDrawn(false);
     setHasResigned(false);
     setHasOpponentResigned(false);
     setInProgress(true);
     setWinner(null);
-    setGameState(
-      isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
-    );
     setLastMove(Array.from({ length: 8 }, (_) => new Array(8).fill(false)));
     setIsSpherePlaced(false);
   };
@@ -90,8 +87,6 @@ const OnlineBoard = ({
     });
 
     socket.on("updateGameState", (newGameState) => {
-      console.log(gameState);
-      console.log(newGameState);
       setLastMove(
         gameState.map((row, x) =>
           row.map((square, y) => square !== newGameState[x][y])
@@ -132,14 +127,23 @@ const OnlineBoard = ({
       setHasOpponentRequestedRematch(true);
     });
 
-    socket.on("resetGame", (startingPlayer) => {
+    socket.on("resetGame", (startingPlayer, gameState) => {
       setHasRequestedRematch(false);
       setHasOpponentRequestedRematch(false);
 
       const isStartingPlayer = players[startingPlayer].name === username;
       setPlayerNumber(isStartingPlayer ? Players.WHITE : Players.BLACK);
-      setPovInitialGameState(
-        isStartingPlayer ? InitialGameStateWhite : InitialGameStateBlack
+
+      setGameState(
+        gameMode === GameModes.ORIGINAL
+          ? isStartingPlayer
+            ? JSON.parse(JSON.stringify(InitialGameStateWhite))
+            : JSON.parse(JSON.stringify(InitialGameStateBlack))
+          : isStartingPlayer
+          ? gameState
+          : JSON.parse(JSON.stringify(gameState))
+              .map((row) => row.reverse())
+              .reverse()
       );
       setIsPlayerTurn(isStartingPlayer);
 
@@ -164,6 +168,7 @@ const OnlineBoard = ({
       setDisconnectedMessage(disconnectedReason);
     });
   }, [
+    gameMode,
     gameState,
     players,
     setDisconnectedMessage,
@@ -320,7 +325,7 @@ const OnlineBoard = ({
 
   const requestRematch = () => {
     setHasRequestedRematch(true);
-    socket.emit("requestRematch", username);
+    socket.emit("requestRematch", username, gameMode);
   };
 
   return (
