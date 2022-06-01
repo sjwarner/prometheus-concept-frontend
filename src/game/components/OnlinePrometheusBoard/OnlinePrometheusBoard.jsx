@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
+import BoardSquares from "../BoardSquares/BoardSquares";
 import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
 import BoardSidePane from "../BoardSidePane/BoardSidePane";
 
@@ -288,35 +288,16 @@ const OnlinePrometheusBoard = ({
     <>
       <div className="board flex flex-row m-auto">
         <div className="content">
-          {Array(8)
-            .fill(1)
-            .map((el, x) => {
-              return (
-                <div
-                  id={`rank-${x}`}
-                  className="board-row flex flex-row"
-                  key={x}
-                >
-                  {Array(8)
-                    .fill(1)
-                    .map((el, y) => {
-                      return (
-                        <PrometheusSquare
-                          colour={(x + y) % 2 === 0 ? "black" : "white"}
-                          piece={gameState[x][y]}
-                          selected={x === originRank && y === originFile}
-                          lastMove={lastMove[x][y]}
-                          valid={isArrayInArray(validMoves, [x, y])}
-                          onClick={() => {
-                            if (inProgress && isPlayerTurn) makeMove(x, y);
-                          }}
-                          key={y}
-                        />
-                      );
-                    })}
-                </div>
-              );
-            })}
+          <BoardSquares
+            gameState={gameState}
+            originRank={originRank}
+            originFile={originFile}
+            lastMove={lastMove}
+            validMoves={validMoves}
+            inProgress={inProgress}
+            isPlayerTurn={isPlayerTurn}
+            makeMove={makeMove}
+          />
           <OnlineBoardCaption
             inProgress={inProgress}
             isPlayerTurn={isPlayerTurn}
