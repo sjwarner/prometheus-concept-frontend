@@ -1,5 +1,5 @@
 import React from "react";
-import Caption from "../Caption/Caption";
+import Caption from "../../../general/components/Caption/Caption";
 import Button from "../../../general/components/Button/Button";
 
 const OnlineBoardCaption = ({
