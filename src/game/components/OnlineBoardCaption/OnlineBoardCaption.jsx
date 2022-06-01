@@ -4,6 +4,7 @@ const OnlineBoardCaption = ({
   inProgress,
   isPlayerTurn,
   isSpherePlaced,
+  isGameDrawn,
   winner,
   hasResigned,
   hasOpponentResigned,
@@ -12,7 +13,7 @@ const OnlineBoardCaption = ({
   requestRematch,
 }) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 mb-4">
       {inProgress && isPlayerTurn && !isSpherePlaced && (
         <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
           Place your sphere.
@@ -41,6 +42,11 @@ const OnlineBoardCaption = ({
       {hasOpponentResigned && (
         <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
           🎉 You win, opponent resigned! 🎉
+        </span>
+      )}
+      {isGameDrawn && (
+        <span className="block m-auto mt-4 bg-white text-gray-800 py-2 px-4">
+          Game drawn!
         </span>
       )}
       {!inProgress && (

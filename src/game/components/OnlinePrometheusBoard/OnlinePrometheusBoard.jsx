@@ -40,6 +40,10 @@ const OnlinePrometheusBoard = ({
   const [lastMove, setLastMove] = useState(
     Array.from({ length: 8 }, (_) => new Array(8).fill(false))
   );
+
+  const [hasOfferedDraw, setHasOfferedDraw] = useState(false);
+  const [hasOpponentOfferedDraw, setHasOpponentOfferedDraw] = useState(false);
+  const [isGameDrawn, setIsGameDrawn] = useState(false);
   const [winner, setWinner] = useState(null);
 
   const [hasResigned, setHasResigned] = useState(false);
@@ -50,6 +54,7 @@ const OnlinePrometheusBoard = ({
     useState(false);
 
   const resetGame = (isStartingPlayer) => {
+    setIsGameDrawn(false);
     setHasResigned(false);
     setHasOpponentResigned(false);
     setInProgress(true);
@@ -89,8 +94,21 @@ const OnlinePrometheusBoard = ({
       setInProgress(false);
     });
 
+    socket.on("opponentOfferedDraw", () => {
+      setHasOpponentOfferedDraw(true);
+    });
+
+    socket.on("opponentAcceptedDraw", () => {
+      setHasOfferedDraw(false);
+      setIsGameDrawn(true);
+      setInProgress(false);
+    });
+
+    socket.on("opponentDeclinedDraw", () => {
+      setHasOfferedDraw(false);
+    });
+
     socket.on("opponentResigned", () => {
-      console.log("opponent resigned event");
       setHasOpponentResigned(true);
       setInProgress(false);
     });
@@ -290,6 +308,7 @@ const OnlinePrometheusBoard = ({
             inProgress={inProgress}
             isPlayerTurn={isPlayerTurn}
             isSpherePlaced={isSpherePlaced}
+            isGameDrawn={isGameDrawn}
             winner={winner}
             hasResigned={hasResigned}
             hasOpponentResigned={hasOpponentResigned}
@@ -306,6 +325,11 @@ const OnlinePrometheusBoard = ({
         setHasResigned={setHasResigned}
         inProgress={inProgress}
         setInProgress={setInProgress}
+        hasOfferedDraw={hasOfferedDraw}
+        setHasOfferedDraw={setHasOfferedDraw}
+        hasOpponentOfferedDraw={hasOpponentOfferedDraw}
+        setHasOpponentOfferedDraw={setHasOpponentOfferedDraw}
+        setIsGameDrawn={setIsGameDrawn}
       />
     </>
   );
