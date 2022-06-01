@@ -292,37 +292,79 @@ const OnlinePrometheusBoard = ({
           <div className="h-10 w-10 mt-auto mb-auto">
             <Tetrahedron colour="white" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "T").length,
+              0
+            )}
+          </span>
         </div>
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Pyramid colour="white" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "P").length,
+              0
+            )}
+          </span>
         </div>
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Cube colour="white" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "C").length,
+              0
+            )}
+          </span>
         </div>
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Tetrahedron colour="black" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "t").length,
+              0
+            )}
+          </span>
         </div>
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Pyramid colour="black" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "p").length,
+              0
+            )}
+          </span>
         </div>
         <div className="flex flex-row">
           <div className="h-10 w-10 mt-auto mb-auto">
             <Cube colour="black" />
           </div>
-          <span className="mt-auto mb-auto">:8</span>
+          <span className="mt-auto mb-auto">
+            :
+            {gameState.reduce(
+              (currentCount, row) =>
+                currentCount + row.filter((square) => square === "c").length,
+              0
+            )}
+          </span>
         </div>
       </div>
     </>
