@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PrometheusSquare from "../PrometheusSquare/PrometheusSquare";
+import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
+import BoardSidePane from "../BoardSidePane/BoardSidePane";
+
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
+
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
-import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
-import Tetrahedron from "../Pieces/Tetrahedron";
-import Pyramid from "../Pieces/Pyramid";
-import Cube from "../Pieces/Cube";
 
 const LocalPrometheusBoard = ({
   inProgress,
@@ -167,86 +167,7 @@ const LocalPrometheusBoard = ({
           />
         </div>
       </div>
-      <div className="w-64 flex flex-row lg:flex-col justify-center items-center">
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Tetrahedron colour="white" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "T").length,
-              0
-            )}
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Pyramid colour="white" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "P").length,
-              0
-            )}
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Cube colour="white" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "C").length,
-              0
-            )}
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Tetrahedron colour="black" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "t").length,
-              0
-            )}
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Pyramid colour="black" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "p").length,
-              0
-            )}
-          </span>
-        </div>
-        <div className="flex flex-row">
-          <div className="h-10 w-10 mt-auto mb-auto">
-            <Cube colour="black" />
-          </div>
-          <span className="mt-auto mb-auto">
-            :
-            {gameState.reduce(
-              (currentCount, row) =>
-                currentCount + row.filter((square) => square === "c").length,
-              0
-            )}
-          </span>
-        </div>
-      </div>
+      <BoardSidePane gameState={gameState} />
     </>
   );
 };

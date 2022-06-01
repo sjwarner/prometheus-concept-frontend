@@ -1,4 +1,9 @@
 import Pieces from "./Pieces";
+import Sphere from "../components/Pieces/Sphere";
+import Tetrahedron from "../components/Pieces/Tetrahedron";
+import Pyramid from "../components/Pieces/Pyramid";
+import Cube from "../components/Pieces/Cube";
+import Empty from "../components/Pieces/Empty";
 
 export const calculateValidMoves = (
   rank,
@@ -150,4 +155,27 @@ const isUpper = (str) => {
 
 const isPlayerPiece = (str1, str2) => {
   return isUpper(str1) === isUpper(str2);
+};
+
+export const renderPiece = (piece) => {
+  switch (piece) {
+    case Pieces.WHITE_SPHERE:
+      return <Sphere colour="white" />;
+    case Pieces.BLACK_SPHERE:
+      return <Sphere colour="black" />;
+    case Pieces.WHITE_TETRAHEDRON:
+      return <Tetrahedron colour="white" />;
+    case Pieces.BLACK_TETRAHEDRON:
+      return <Tetrahedron colour="black" />;
+    case Pieces.WHITE_PYRAMID:
+      return <Pyramid colour="white" />;
+    case Pieces.BLACK_PYRAMID:
+      return <Pyramid colour="black" />;
+    case Pieces.WHITE_CUBE:
+      return <Cube colour="white" />;
+    case Pieces.BLACK_CUBE:
+      return <Cube colour="black" />;
+    default:
+      return <Empty />;
+  }
 };
