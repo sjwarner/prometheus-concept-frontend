@@ -10,6 +10,9 @@ import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 
 import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
+import Pyramid from "../Pieces/Pyramid";
+import Tetrahedron from "../Pieces/Tetrahedron";
+import Cube from "../Pieces/Cube";
 
 const OnlinePrometheusBoard = ({
   socket,
@@ -241,44 +244,88 @@ const OnlinePrometheusBoard = ({
   };
 
   return (
-    <div className="board flex flex-row">
-      <div className="content">
-        {Array(8)
-          .fill(1)
-          .map((el, x) => {
-            return (
-              <div id={`rank-${x}`} className="board-row flex flex-row" key={x}>
-                {Array(8)
-                  .fill(1)
-                  .map((el, y) => {
-                    return (
-                      <PrometheusSquare
-                        colour={(x + y) % 2 === 0 ? "black" : "white"}
-                        piece={gameState[x][y]}
-                        selected={x === originRank && y === originFile}
-                        lastMove={lastMove[x][y]}
-                        valid={isArrayInArray(validMoves, [x, y])}
-                        onClick={() => {
-                          if (inProgress && isPlayerTurn) makeMove(x, y);
-                        }}
-                        key={y}
-                      />
-                    );
-                  })}
-              </div>
-            );
-          })}
-        <OnlineBoardCaption
-          inProgress={inProgress}
-          isPlayerTurn={isPlayerTurn}
-          isSpherePlaced={isSpherePlaced}
-          winner={winner}
-          hasRequestedRematch={hasRequestedRematch}
-          hasOpponentRequestedRematch={hasOpponentRequestedRematch}
-          requestRematch={requestRematch}
-        />
+    <>
+      <div className="board flex flex-row">
+        <div className="content">
+          {Array(8)
+            .fill(1)
+            .map((el, x) => {
+              return (
+                <div
+                  id={`rank-${x}`}
+                  className="board-row flex flex-row"
+                  key={x}
+                >
+                  {Array(8)
+                    .fill(1)
+                    .map((el, y) => {
+                      return (
+                        <PrometheusSquare
+                          colour={(x + y) % 2 === 0 ? "black" : "white"}
+                          piece={gameState[x][y]}
+                          selected={x === originRank && y === originFile}
+                          lastMove={lastMove[x][y]}
+                          valid={isArrayInArray(validMoves, [x, y])}
+                          onClick={() => {
+                            if (inProgress && isPlayerTurn) makeMove(x, y);
+                          }}
+                          key={y}
+                        />
+                      );
+                    })}
+                </div>
+              );
+            })}
+          <OnlineBoardCaption
+            inProgress={inProgress}
+            isPlayerTurn={isPlayerTurn}
+            isSpherePlaced={isSpherePlaced}
+            winner={winner}
+            hasRequestedRematch={hasRequestedRematch}
+            hasOpponentRequestedRematch={hasOpponentRequestedRematch}
+            requestRematch={requestRematch}
+          />
+        </div>
       </div>
-    </div>
+      <div className="w-64 flex flex-col justify-center items-center">
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Tetrahedron colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Pyramid colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Cube colour="white" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Tetrahedron colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Pyramid colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+        <div className="flex flex-row">
+          <div className="h-10 w-10 mt-auto mb-auto">
+            <Cube colour="black" />
+          </div>
+          <span className="mt-auto mb-auto">:8</span>
+        </div>
+      </div>
+    </>
   );
 };
 

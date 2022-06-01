@@ -97,7 +97,7 @@ const CreateGamePage = () => {
         </Modal>
       )}
       <div className="p-8 px-12 flex flex-col md:flex-row items-center">
-        <div className="app p-8 flex flex-col justify-center items-center w-full">
+        <div className="app p-8 flex flex-row justify-center items-center w-full">
           {!isGameStarted && (
             <CreateGameWizard
               baseUrl={baseUrl}
@@ -129,7 +129,6 @@ const CreateGamePage = () => {
             />
           )}
         </div>
-        {isGameStarted && <div className="w-64 text-center">Foobar</div>}
       </div>
     </>
   );
