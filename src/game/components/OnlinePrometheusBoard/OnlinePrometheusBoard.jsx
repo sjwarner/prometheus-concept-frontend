@@ -98,6 +98,11 @@ const OnlinePrometheusBoard = ({
       setHasOpponentOfferedDraw(true);
     });
 
+    socket.on("opponentWithdrewDrawOffer", () => {
+      console.log("Dealing with withdraw offer");
+      setHasOpponentOfferedDraw(false);
+    });
+
     socket.on("opponentAcceptedDraw", () => {
       setHasOfferedDraw(false);
       setIsGameDrawn(true);
@@ -182,6 +187,11 @@ const OnlinePrometheusBoard = ({
         : selectedSquare.toLowerCase();
 
     if (selectedSquare && selectedSquare === selectedSquareCaseTransformed) {
+      if (hasOfferedDraw) {
+        setHasOfferedDraw(false);
+        socket.emit("playerWithdrewDrawOffer", socket.id);
+      }
+
       // Use a deep copy of gameState to work out previous move highlighting
       let oldGameState = JSON.parse(JSON.stringify(gameState));
       let tmp = gameState;
@@ -214,6 +224,10 @@ const OnlinePrometheusBoard = ({
         candidatePiece &&
         candidatePiece === candidatePiece.toLowerCase())
     ) {
+      if (hasOfferedDraw) {
+        setHasOfferedDraw(false);
+        socket.emit("playerWithdrewDrawOffer", socket.id);
+      }
       setOriginRank(rank);
       setOriginFile(file);
       calculateValidMoves(rank, file, gameState, setValidMoves, firstTurn);
