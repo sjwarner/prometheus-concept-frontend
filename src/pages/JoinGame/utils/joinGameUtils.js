@@ -1,4 +1,5 @@
 import axios from "axios";
+import GameModes from "../../../game/logic/GameModes";
 
 export const attemptJoinParty = (
   baseUrl,
@@ -10,6 +11,7 @@ export const attemptJoinParty = (
   setIsLoading,
   setIsInRoom,
   setPlayers,
+  setGameMode,
   setInitialGameState,
   setIsGameStarted
 ) => {
@@ -40,6 +42,7 @@ export const attemptJoinParty = (
           setErrorMessage,
           setHasError,
           setPlayers,
+          setGameMode,
           setInitialGameState,
           setIsGameStarted
         );
@@ -71,6 +74,7 @@ const joinParty = (
   setErrorMessage,
   setHasError,
   setPlayers,
+  setGameMode,
   setInitialGameState,
   setIsGameStarted
 ) => {
@@ -98,10 +102,12 @@ const joinParty = (
   });
 
   socket.on("startGame", () => {
+    setGameMode(GameModes.ORIGINAL);
     setIsGameStarted(true);
   });
 
   socket.on("startRandomGame", (gameState) => {
+    setGameMode(GameModes.RANDOM);
     setInitialGameState(gameState);
     setIsGameStarted(true);
   });

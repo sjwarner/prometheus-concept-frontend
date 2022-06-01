@@ -1,4 +1,5 @@
 import axios from "axios";
+import GameModes from "../../../game/logic/GameModes";
 
 export const createParty = (
   baseUrl,
@@ -36,15 +37,18 @@ export const startGame = (
   players,
   setIsGameStarted,
   setInitialGameState,
+  setGameMode,
   gameMode
 ) => {
   socket.emit("startGameSignal", players, gameMode);
 
   socket.on("startGame", () => {
+    setGameMode(GameModes.ORIGINAL);
     setIsGameStarted(true);
   });
 
   socket.on("startRandomGame", (gameState) => {
+    setGameMode(GameModes.RANDOM);
     setInitialGameState(gameState);
     setIsGameStarted(true);
   });

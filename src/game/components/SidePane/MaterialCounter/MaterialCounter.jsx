@@ -7,7 +7,7 @@ const MaterialCounter = ({ gameState, piece }) => {
       <div className="h-10 w-10 mt-auto mb-auto">{renderPiece(piece)}</div>
       <span className="mt-auto mb-auto">
         :
-        {gameState.reduce(
+        {gameState?.reduce(
           (currentCount, row) =>
             currentCount + row.filter((square) => square === piece).length,
           0

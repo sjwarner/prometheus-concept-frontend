@@ -19,6 +19,7 @@ const CreateGameWizard = ({
   canStart,
   socket,
   setIsGameStarted,
+  setGameMode,
   setInitialGameState,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -86,6 +87,7 @@ const CreateGameWizard = ({
                 players,
                 setIsGameStarted,
                 setInitialGameState,
+                setGameMode,
                 GameModes.ORIGINAL
               )
             }
@@ -99,6 +101,7 @@ const CreateGameWizard = ({
                 players,
                 setIsGameStarted,
                 setInitialGameState,
+                setGameMode,
                 GameModes.RANDOM
               )
             }
