@@ -61,7 +61,10 @@ const CreateGameWizard = ({
           <p className="m-auto">Room Code:&nbsp;</p>
           <div className="flex">
             <b className="m-auto">{roomCode}&nbsp;</b>
-            <Button onClick={() => navigator.clipboard.writeText(roomCode)}>
+            <Button
+              className="mt-auto"
+              onClick={() => navigator.clipboard.writeText(roomCode)}
+            >
               <FeatherIcon icon="clipboard" alt="Copy room code" />
             </Button>
           </div>
