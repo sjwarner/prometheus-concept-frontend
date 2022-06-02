@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+import useSound from "use-sound";
+
 import BoardSquares from "../BoardSquares/BoardSquares";
 import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
 import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
+
+import moveSfx from "../../../sounds/move.wav";
 
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
@@ -26,6 +30,7 @@ const LocalBoard = ({
   const [originFile, setOriginFile] = useState(null);
   const [playerOneFirstTurn, setPlayerOneFirstTurn] = useState(true);
   const [playerTwoFirstTurn, setPlayerTwoFirstTurn] = useState(true);
+  const [playMoveSound] = useSound(moveSfx);
   const [validMoves, setValidMoves] = useState([]);
 
   useEffect(() => {
@@ -34,6 +39,7 @@ const LocalBoard = ({
   }, [inProgress]);
 
   const makeMove = (rank, file) => {
+    playMoveSound();
     !playerOneSpherePlaced
       ? addPlayerSphere(Players.WHITE, rank, file)
       : !playerTwoSpherePlaced

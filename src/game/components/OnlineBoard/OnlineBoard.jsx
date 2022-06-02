@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
+import useSound from "use-sound";
+
 import BoardSquares from "../BoardSquares/BoardSquares";
 import OnlineBoardCaption from "../OnlineBoardCaption/OnlineBoardCaption";
 import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
+
+import moveSfx from "../../../sounds/move.wav";
 
 import {
   InitialGameStateWhite,
@@ -27,6 +31,7 @@ const OnlineBoard = ({
   const [inProgress, setInProgress] = useState(isGameStarted);
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
   const [playerNumber, setPlayerNumber] = useState(initialPlayerNumber);
+  const [playMoveSound] = useSound(moveSfx);
 
   const [isSpherePlaced, setIsSpherePlaced] = useState(false);
 
@@ -85,6 +90,8 @@ const OnlineBoard = ({
     });
 
     socket.on("updateGameState", (newGameState) => {
+      playMoveSound();
+
       setLastMove(
         gameState.map((row, x) =>
           row.map((square, y) => square !== newGameState[x][y])
@@ -168,6 +175,7 @@ const OnlineBoard = ({
   }, [
     gameMode,
     gameState,
+    playMoveSound,
     players,
     setDisconnectedMessage,
     setIsDisconnected,
@@ -181,7 +189,8 @@ const OnlineBoard = ({
     }
   }, [socket, joinParty]);
 
-  const makeMove = (rank, file) =>
+  const makeMove = (rank, file) => {
+    playMoveSound();
     !isSpherePlaced
       ? addSphere(rank, file)
       : originRank === null && originFile === null
@@ -189,6 +198,7 @@ const OnlineBoard = ({
       : originRank === rank && originFile === file
       ? clearCandidatePiece()
       : movePiece(rank, file);
+  };
 
   const addSphere = (rank, file) => {
     let selectedSquare = gameState[rank][file];
