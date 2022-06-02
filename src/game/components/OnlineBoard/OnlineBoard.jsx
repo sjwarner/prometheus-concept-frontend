@@ -40,9 +40,7 @@ const OnlineBoard = ({
             : InitialGameStateBlack
           : playerNumber === Players.WHITE
           ? initialGameState
-          : JSON.parse(JSON.stringify(initialGameState))
-              .map((row) => row.reverse())
-              .reverse()
+          : initialGameState.map((row) => row.reverse()).reverse()
       )
     )
   );
