@@ -9,6 +9,8 @@ const Footer = () => {
           Learn the{" "}
           <a
             href="https://www.prometheusconcept.com/schedule"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline text-blue-300 hover:text-blue-400 visited:text-purple-600"
           >
             rules
