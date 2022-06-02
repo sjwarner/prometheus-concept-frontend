@@ -6,6 +6,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:android": "npm run build && npx cap sync",
     "test": "craco test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -14,6 +15,8 @@
     "lint:fix": "npx prettier --write ."
   },
   "dependencies": {
+    "@capacitor/android": "3.5.1",
+    "@capacitor/core": "^3.5.1",
     "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^11.1.0",
@@ -31,6 +34,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@capacitor/cli": "^3.5.1",
     "autoprefixer": "^9.8.8",
     "gh-pages": "^3.2.3",
     "husky": "^7.0.4",

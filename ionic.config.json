@@ -1,0 +1,7 @@
+{
+  "name": "prometheus-concept",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

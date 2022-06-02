@@ -1,0 +1,8 @@
+{
+  "appId": "me.sjwarner.prometheusConcept",
+  "appName": "prometheus-concept",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}

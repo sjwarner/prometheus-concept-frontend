@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">prometheus-concept</string>
+    <string name="title_activity_main">prometheus-concept</string>
+    <string name="package_name">me.sjwarner.prometheusConcept</string>
+    <string name="custom_url_scheme">me.sjwarner.prometheusConcept</string>
+</resources>
